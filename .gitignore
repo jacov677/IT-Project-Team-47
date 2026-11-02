@@ -1,21 +1,11 @@
-# Secrets and local settings
 .env
-
-# Python
 __pycache__/
 *.py[cod]
 .venv/
 venv/
-env/
-
-# Django
 db.sqlite3
-db.sqlite3-journal
+media/
 staticfiles/
-protected_media/
-*.log
-
-# Editors and OS
 .vscode/
 .idea/
 .DS_Store

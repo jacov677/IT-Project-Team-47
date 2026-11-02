@@ -1,7 +1,5 @@
-# Python 3.10 or newer. Install with:  pip install -r requirements.txt
-Django>=5.2,<5.3          # 5.2 is the Long Term Support release (supported to April 2028)
-mysqlclient>=2.2          # MySQL driver named in Phase 4, section 4.4.6
-python-dotenv>=1.0        # loads settings from the .env file
+Django>=5.2,<5.3        # 5.2 is the Long Term Support release
+python-dotenv>=1.0      # reads settings from the .env file
 
-# Production only (section 4.4.6): Gunicorn runs Django behind Nginx on the Linux server.
-gunicorn>=23.0; sys_platform != "win32"
+# When the team switches to MySQL (DB_ENGINE=mysql in .env), also run:
+#   pip install mysqlclient

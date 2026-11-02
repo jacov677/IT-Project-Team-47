@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h3 mb-1">WIL Placement Management System</h1>
+<p class="text-body-secondary mb-4">IT Project Team 47 · Richfield Graduate Institute of Technology</p>
+<div class="row g-3">
+  {% for url_name, name, description in modules %}
+  <div class="col-md-6 col-lg-4">
+    <a class="card h-100 text-decoration-none" href="{% url url_name %}">
+      <div class="card-body">
+        <h2 class="h5 mb-1">{{ name }}</h2>
+        <p class="text-body-secondary mb-0">{{ description }}</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

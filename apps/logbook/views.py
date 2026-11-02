@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def index(request):
+    """Start page of the Logbook module. Replace with the real pages."""
+    return render(request, "logbook/index.html")
