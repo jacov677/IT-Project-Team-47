@@ -1,0 +1,10 @@
+# South African date display, e.g. 27 Oct 2026 and 27 Oct 2026, 14:30
+DATE_FORMAT = "j M Y"
+DATETIME_FORMAT = "j M Y, H:i"
+SHORT_DATE_FORMAT = "Y-m-d"
+SHORT_DATETIME_FORMAT = "Y-m-d H:i"
+TIME_FORMAT = "H:i"
+DATE_INPUT_FORMATS = ["%Y-%m-%d", "%d/%m/%Y"]
+FIRST_DAY_OF_WEEK = 1
+DECIMAL_SEPARATOR = "."
+THOUSAND_SEPARATOR = " "

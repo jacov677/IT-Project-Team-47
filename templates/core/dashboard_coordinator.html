@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Coordinator dashboard{% endblock %}
+{% block content %}
+<h1 class="h3 mb-4">Placement overview</h1>
+<div class="row g-3 mb-4">
+  {% for label, n in counts.items %}
+  <div class="col-6 col-md"><div class="card stat-card text-center"><div class="card-body">
+    <div class="display-6">{{ n }}</div><div class="text-body-secondary">{{ label }}</div>
+  </div></div></div>
+  {% endfor %}
+</div>
+<div class="card"><div class="card-body">
+  <h2 class="h6 text-uppercase text-body-secondary">Placements waiting for approval</h2>
+  <table class="table table-sm mb-0">
+    <thead><tr><th>Student</th><th>Organisation</th><th>Dates</th></tr></thead>
+    <tbody>{% for p in pending %}
+      <tr><td><a href="{% url 'placements:detail' p.pk %}">{{ p.student }}</a></td><td>{{ p.organisation }}</td><td>{{ p.start_date }} to {{ p.end_date }}</td></tr>
+    {% empty %}<tr><td colspan="3" class="text-body-secondary">Nothing waiting for approval.</td></tr>{% endfor %}</tbody>
+  </table>
+</div></div>
+{% endblock %}

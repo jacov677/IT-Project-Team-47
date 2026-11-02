@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Student dashboard{% endblock %}
+{% block content %}
+<h1 class="h3 mb-4">Welcome, {{ student.first_name }}</h1>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card h-100"><div class="card-body">
+      <h2 class="h6 text-uppercase text-body-secondary">My profile</h2>
+      <p class="mb-1"><strong>{{ student.first_name }} {{ student.last_name }}</strong></p>
+      <p class="mb-1">{{ student.student_number }}</p>
+      <p class="mb-0">{{ student.qualification }}</p>
+    </div></div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card h-100"><div class="card-body">
+      <h2 class="h6 text-uppercase text-body-secondary">Current placement</h2>
+      {% if current %}
+        <p class="mb-1"><a href="{% url 'placements:detail' current.pk %}">{{ current.organisation }}</a> {% include "core/_status.html" with status=current.status %}</p>
+        <p class="mb-1">Mentor: {{ current.mentor.first_name }} {{ current.mentor.last_name }}</p>
+        <p class="mb-3">{{ current.start_date }} to {{ current.end_date }}</p>
+        <h3 class="h6">Recent logbook entries</h3>
+        <ul class="list-group list-group-flush">
+          {% for entry in recent_entries %}
+            <li class="list-group-item d-flex justify-content-between"><span>{{ entry.entry_date }} &middot; {{ entry.hours_worked }} h</span>
+              <span>{% if entry.mentor_signed_off %}<span class="badge text-bg-success">Signed off</span>{% else %}<span class="badge text-bg-warning">Awaiting sign-off</span>{% endif %}</span></li>
+          {% empty %}<li class="list-group-item text-body-secondary">No entries yet.</li>{% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-body-secondary mb-0">You do not have an approved placement yet.</p>
+      {% endif %}
+    </div></div>
+  </div>
+  <div class="col-12">
+    <div class="card"><div class="card-body">
+      <h2 class="h6 text-uppercase text-body-secondary">All my placements</h2>
+      <table class="table table-sm mb-0">
+        <thead><tr><th>Organisation</th><th>Dates</th><th>Status</th></tr></thead>
+        <tbody>{% for p in placements %}
+          <tr><td><a href="{% url 'placements:detail' p.pk %}">{{ p.organisation }}</a></td><td>{{ p.start_date }} to {{ p.end_date }}</td><td>{% include "core/_status.html" with status=p.status %}</td></tr>
+        {% empty %}<tr><td colspan="3" class="text-body-secondary">No placements yet.</td></tr>{% endfor %}</tbody>
+      </table>
+    </div></div>
+  </div>
+</div>
+{% endblock %}

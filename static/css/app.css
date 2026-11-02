@@ -1,0 +1,3 @@
+/* Project-wide styles. Keep colours accessible (WCAG AA contrast), see section 4.7. */
+.stat-card .display-6 { font-weight: 600; }
+.status-badge { text-transform: capitalize; }
