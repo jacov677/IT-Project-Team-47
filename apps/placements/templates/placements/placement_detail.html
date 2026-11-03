@@ -1,0 +1,102 @@
+
+{% extends "base.html" %}
+
+{% block title %}Placement Details · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3">Placement Details</h1>
+            <p class="text-body-secondary">
+                View student placement information and approval details.
+            </p>
+        </div>
+
+        <a href="{% url 'placements:placement_list' %}"
+           class="btn btn-outline-secondary">
+            Back to Placements
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Student information -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Student Information</h5>
+
+                    <p><strong>Student Number:</strong> Not assigned</p>
+                    <p><strong>First Name:</strong> Not available</p>
+                    <p><strong>Last Name:</strong> Not available</p>
+                    <p><strong>Qualification:</strong> Not available</p>
+                    <p><strong>Contact Number:</strong> Not available</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organisation information -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Organisation Information</h5>
+
+                    <p><strong>Organisation:</strong> Not assigned</p>
+                    <p><strong>Industry:</strong> Not available</p>
+                    <p><strong>Address:</strong> Not available</p>
+                    <p><strong>Contact Email:</strong> Not available</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Placement information -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Placement Information</h5>
+
+                    <p><strong>Placement ID:</strong> Not assigned</p>
+                    <p><strong>Start Date:</strong> Not available</p>
+                    <p><strong>End Date:</strong> Not available</p>
+                    <p><strong>Status:</strong>
+                        <span class="badge bg-secondary">Not assigned</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mentor and coordinator -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Supervision Information</h5>
+
+                    <p><strong>Assigned Mentor:</strong> Not assigned</p>
+                    <p><strong>Coordinator:</strong> Not assigned</p>
+                    <p><strong>Approval Date:</strong> Not available</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm border-0 mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Placement Documents</h5>
+
+            <p class="text-body-secondary">
+                Uploaded placement documents will be displayed here.
+            </p>
+
+            <div class="alert alert-info mb-0">
+                No documents available yet.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

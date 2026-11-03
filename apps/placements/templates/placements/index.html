@@ -1,7 +1,108 @@
+
 {% extends "base.html" %}
-{% block title %}Placements · WIL Placement System{% endblock %}
+
+{% block title %}Coordinator Dashboard · WIL Placement System{% endblock %}
+
 {% block content %}
-<h1 class="h3">Placements</h1>
-<p class="text-body-secondary">Placement requests, coordinator approval or rejection, document uploads.</p>
-<div class="alert alert-info">This module has not been built yet.</div>
+
+<div class="container-fluid">
+
+    <!-- Dashboard Heading -->
+    <div class="mb-4">
+        <h1 class="h3">Coordinator Dashboard</h1>
+        <p class="text-body-secondary">
+            Manage student workplace placements and approvals.
+        </p>
+    </div>
+
+    <!-- Dashboard Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Total Placements</h6>
+                    <h2 class="mb-0">0</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Pending Approvals</h6>
+                    <h2 class="mb-0">0</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Active Placements</h6>
+                    <h2 class="mb-0">0</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Placement Management -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Placement Management</h5>
+
+            <p class="text-body-secondary">
+                Create, view and manage student workplace placements.
+            </p>
+
+            <a href="{% url 'placements:placement_list' %}"
+               class="btn btn-primary me-2">
+                View Placements
+            </a>
+
+            <a href="{% url 'placements:placement_create' %}"
+               class="btn btn-outline-primary">
+                Create Placement
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Navigation -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h5 class="card-title mb-3">Quick Navigation</h5>
+
+            <div class="d-flex flex-wrap gap-2">
+
+                <a href="{% url 'placements:placement_list' %}"
+                   class="btn btn-outline-primary">
+                    Manage Placements
+                </a>
+
+                <a href="{% url 'placements:placement_create' %}"
+                   class="btn btn-outline-primary">
+                    Create Placement
+                </a>
+
+                <a href="{% url 'placements:placement_detail' %}"
+                   class="btn btn-outline-primary">
+                    Placement Details
+                </a>
+
+                <a href="{% url 'placements:document_list' %}"
+                   class="btn btn-outline-primary">
+                    Manage Documents
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
 {% endblock %}
+
+

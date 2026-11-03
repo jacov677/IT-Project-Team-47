@@ -1,0 +1,173 @@
+
+{% extends "base.html" %}
+
+{% block title %}Manage Placements · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page heading -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+        <div>
+            <h1 class="h3">Manage Placements</h1>
+            <p class="text-body-secondary">
+                View, monitor and manage student workplace placements.
+            </p>
+        </div>
+
+        <a href="{% url 'placements:placement_create' %}"
+           class="btn btn-success">
+            + Create Placement
+        </a>
+
+    </div>
+
+    <!-- Status summary -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Pending</h6>
+                    <h3>0</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Approved</h6>
+                    <h3>0</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Active</h6>
+                    <h3>0</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Completed</h6>
+                    <h3>0</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Search and filters -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+
+            <h5 class="card-title mb-3">Search and Filter Placements</h5>
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label class="form-label">Search</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search by student or organisation..."
+                           disabled>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Placement Status</label>
+                    <select class="form-select" disabled>
+                        <option>All Statuses</option>
+                        <option>Pending</option>
+                        <option>Approved</option>
+                        <option>Active</option>
+                        <option>Completed</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-primary w-100" disabled>
+                        Search
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Placement records -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0">Placement Records</h5>
+
+                <a href="{% url 'placements:index' %}"
+                   class="btn btn-outline-secondary btn-sm">
+                    Dashboard
+                </a>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Placement ID</th>
+                            <th>Student</th>
+                            <th>Organisation</th>
+                            <th>Mentor</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td colspan="8"
+                                class="text-center text-body-secondary py-5">
+
+                                <h6>No Placement Records Yet</h6>
+
+                                <p class="mb-3">
+                                    Placement records will appear here
+                                    once they are registered in the system.
+                                </p>
+
+                                <a href="{% url 'placements:placement_create' %}"
+                                   class="btn btn-primary btn-sm">
+                                    Create First Placement
+                                </a>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+

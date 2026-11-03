@@ -1,0 +1,105 @@
+
+{% extends "base.html" %}
+
+{% block title %}Create Placement · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="mb-4">
+        <h1 class="h3">Create Placement</h1>
+        <p class="text-body-secondary">
+            Assign a student to a workplace organisation and mentor.
+        </p>
+
+        <a href="{% url 'placements:placement_list' %}"
+           class="btn btn-outline-secondary btn-sm">
+            Back to Placements
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+            <h5 class="mb-4">Placement Information</h5>
+
+            <form>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label">Student Number</label>
+                        <input type="text" class="form-control"
+                               placeholder="Enter student number">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Student Name</label>
+                        <input type="text" class="form-control"
+                               placeholder="Student name" disabled>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Host Organisation</label>
+                        <select class="form-select">
+                            <option selected disabled>Select organisation</option>
+                            <option>Organisation records will load from database</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Assigned Mentor</label>
+                        <select class="form-select">
+                            <option selected disabled>Select mentor</option>
+                            <option>Mentor records will load from database</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">End Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Placement Status</label>
+                        <select class="form-select">
+                            <option selected>Pending</option>
+                            <option>Approved</option>
+                            <option>Rejected</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-primary" disabled>
+                        Create Placement
+                    </button>
+
+                    <a href="{% url 'placements:placement_list' %}"
+                       class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                </div>
+
+                <p class="text-body-secondary small mt-3 mb-0">
+                    Database integration will be added after the shared models
+                    and placement workflow are finalised.
+                </p>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
