@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-
 MODULES = [
     ("accounts:index", "Accounts", "Login, registration, roles and profiles"),
     ("organisations:index", "Organisations", "Host organisations"),
@@ -17,3 +16,7 @@ def home(request):
 
 def audit_log(request):
     return render(request, "core/audit_log.html")
+
+
+def settings_page(request):
+    return render(request, "core/settings.html")

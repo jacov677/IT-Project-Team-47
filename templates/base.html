@@ -1,5 +1,4 @@
 
-
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -267,6 +266,7 @@
         <!-- Left Sidebar -->
         <aside class="wil-sidebar collapse d-lg-block" id="wilSidebar">
 
+            <!-- Main Navigation -->
             <div class="wil-sidebar-heading">
                 Main Navigation
             </div>
@@ -319,6 +319,7 @@
 
             <div class="wil-sidebar-divider"></div>
 
+            <!-- System Administration -->
             <div class="wil-sidebar-heading">
                 System Administration
             </div>
@@ -335,6 +336,24 @@
 
             <div class="wil-sidebar-divider"></div>
 
+            <!-- Preferences -->
+            <div class="wil-sidebar-heading">
+                Preferences
+            </div>
+
+            <nav class="nav flex-column">
+
+                <a class="nav-link {% if request.resolver_match.url_name == 'settings' %}active{% endif %}"
+                   href="{% url 'core:settings' %}">
+                    <span class="nav-icon">⚙</span>
+                    Settings
+                </a>
+
+            </nav>
+
+            <div class="wil-sidebar-divider"></div>
+
+            <!-- Sidebar Footer -->
             <div class="px-3 pt-2">
                 <p class="text-body-secondary small mb-1">
                     WIL Placement System
@@ -390,4 +409,5 @@
 
 </body>
 </html>
+
 
