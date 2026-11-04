@@ -1,4 +1,5 @@
 
+
 {% extends "base.html" %}
 
 {% block title %}Coordinator Dashboard · WIL Placement System{% endblock %}
@@ -96,6 +97,16 @@
                     Manage Documents
                 </a>
 
+                <a href="{% url 'reports:index' %}"
+                   class="btn btn-outline-success">
+                    Coordinator Reports
+                </a>
+
+                <a href="{% url 'core:audit_log' %}"
+                   class="btn btn-outline-dark">
+                    System Audit Log
+                </a>
+
             </div>
 
         </div>
@@ -104,5 +115,6 @@
 </div>
 
 {% endblock %}
+
 
 
