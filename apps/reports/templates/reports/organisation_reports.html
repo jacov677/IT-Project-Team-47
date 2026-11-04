@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Organisation Reports · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3">Organisation Reports</h1>
+            <p class="text-body-secondary">
+                View host organisations and their student placement activity.
+            </p>
+        </div>
+
+        <a href="{% url 'reports:index' %}" class="btn btn-outline-secondary">
+            Back to Reports
+        </a>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Total Organisations</p>
+                    <h3 class="mb-0">—</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Active Host Organisations</p>
+                    <h3 class="mb-0">—</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Total Student Placements</p>
+                    <h3 class="mb-0">—</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Filters -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            <h2 class="h6 mb-0">Filter Organisation Reports</h2>
+        </div>
+
+        <div class="card-body">
+            <div class="row g-3">
+
+                <div class="col-md-5">
+                    <label class="form-label">Organisation Name</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search organisation..."
+                           disabled>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Industry</label>
+                    <select class="form-select" disabled>
+                        <option selected>All Industries</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+                    <button class="btn btn-primary w-100" disabled>
+                        Search Organisations
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Organisation Table -->
+    <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2 class="h6 mb-0">Organisation Placement Overview</h2>
+
+            <button class="btn btn-outline-success btn-sm" disabled>
+                Export Report
+            </button>
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Organisation</th>
+                            <th>Industry</th>
+                            <th>Contact Email</th>
+                            <th>Total Students</th>
+                            <th>Active Placements</th>
+                            <th>Completed Placements</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td colspan="6" class="text-center text-body-secondary py-4">
+                                Organisation report data will appear here once database integration is complete.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="alert alert-info mt-4">
+        <strong>Development note:</strong>
+        Organisation statistics, filtering and report exports will be implemented
+        during database integration.
+    </div>
+
+</div>
+
+{% endblock %}
