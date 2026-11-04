@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block title %}Manage Placements · WIL Placement System{% endblock %}
@@ -8,57 +7,87 @@
 <div class="container-fluid">
 
     <!-- Page heading -->
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
         <div>
-            <h1 class="h3">Manage Placements</h1>
-            <p class="text-body-secondary">
-                View, monitor and manage student workplace placements.
+            <h1 class="h3 fw-bold mb-1">Placement Management</h1>
+            <p class="text-body-secondary mb-0">
+                Monitor student placements, track progress and manage approvals.
             </p>
         </div>
 
         <a href="{% url 'placements:placement_create' %}"
-           class="btn btn-success">
-            + Create Placement
+           class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Create Placement
         </a>
-
     </div>
 
     <!-- Status summary -->
     <div class="row g-3 mb-4">
 
-        <div class="col-md-3">
-            <div class="card shadow-sm border-0">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <h6 class="text-body-secondary">Pending</h6>
-                    <h3>0</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary small mb-1">Pending Approvals</p>
+                            <h3 class="fw-bold mb-0">0</h3>
+                        </div>
+                        <div class="rounded-3 bg-warning-subtle text-warning p-3">
+                            <i class="bi bi-clock-history fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Awaiting coordinator review</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm border-0">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <h6 class="text-body-secondary">Approved</h6>
-                    <h3>0</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary small mb-1">Approved</p>
+                            <h3 class="fw-bold mb-0">0</h3>
+                        </div>
+                        <div class="rounded-3 bg-info-subtle text-info p-3">
+                            <i class="bi bi-check-circle fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Approved placements</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm border-0">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <h6 class="text-body-secondary">Active</h6>
-                    <h3>0</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary small mb-1">Active</p>
+                            <h3 class="fw-bold mb-0">0</h3>
+                        </div>
+                        <div class="rounded-3 bg-success-subtle text-success p-3">
+                            <i class="bi bi-briefcase fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Currently in progress</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm border-0">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <h6 class="text-body-secondary">Completed</h6>
-                    <h3>0</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary small mb-1">Completed</p>
+                            <h3 class="fw-bold mb-0">0</h3>
+                        </div>
+                        <div class="rounded-3 bg-primary-subtle text-primary p-3">
+                            <i class="bi bi-flag fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Successfully completed</small>
                 </div>
             </div>
         </div>
@@ -66,23 +95,33 @@
     </div>
 
     <!-- Search and filters -->
-    <div class="card shadow-sm border-0 mb-4">
-        <div class="card-body">
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
 
-            <h5 class="card-title mb-3">Search and Filter Placements</h5>
+            <div class="mb-3">
+                <h5 class="fw-semibold mb-1">Search and Filter</h5>
+                <p class="text-body-secondary small mb-0">
+                    Find placement records using student details or placement status.
+                </p>
+            </div>
 
             <div class="row g-3">
 
-                <div class="col-md-6">
-                    <label class="form-label">Search</label>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Search by student or organisation..."
-                           disabled>
+                <div class="col-lg-6">
+                    <label class="form-label small fw-semibold">Search placements</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-body-tertiary">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Student name, number or organisation..."
+                               disabled>
+                    </div>
                 </div>
 
-                <div class="col-md-4">
-                    <label class="form-label">Placement Status</label>
+                <div class="col-lg-4">
+                    <label class="form-label small fw-semibold">Placement Status</label>
                     <select class="form-select" disabled>
                         <option>All Statuses</option>
                         <option>Pending</option>
@@ -93,9 +132,9 @@
                     </select>
                 </div>
 
-                <div class="col-md-2 d-flex align-items-end">
-                    <button class="btn btn-primary w-100" disabled>
-                        Search
+                <div class="col-lg-2 d-flex align-items-end">
+                    <button class="btn btn-outline-primary w-100" disabled>
+                        Apply Filters
                     </button>
                 </div>
 
@@ -105,16 +144,21 @@
     </div>
 
     <!-- Placement records -->
-    <div class="card shadow-sm border-0">
+    <div class="card border-0 shadow-sm">
 
-        <div class="card-body">
+        <div class="card-body p-4">
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="card-title mb-0">Placement Records</h5>
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                <div>
+                    <h5 class="fw-semibold mb-1">Placement Records</h5>
+                    <p class="text-body-secondary small mb-0">
+                        Overview of registered workplace placements.
+                    </p>
+                </div>
 
                 <a href="{% url 'placements:index' %}"
                    class="btn btn-outline-secondary btn-sm">
-                    Dashboard
+                    <i class="bi bi-arrow-left"></i> Dashboard
                 </a>
             </div>
 
@@ -136,26 +180,28 @@
                     </thead>
 
                     <tbody>
-
                         <tr>
-                            <td colspan="8"
-                                class="text-center text-body-secondary py-5">
+                            <td colspan="8" class="text-center py-5">
 
-                                <h6>No Placement Records Yet</h6>
+                                <div class="mb-3">
+                                    <i class="bi bi-folder2-open text-body-secondary"
+                                       style="font-size: 3rem;"></i>
+                                </div>
 
-                                <p class="mb-3">
-                                    Placement records will appear here
-                                    once they are registered in the system.
+                                <h6 class="fw-semibold">No Placement Records Found</h6>
+
+                                <p class="text-body-secondary small mb-3">
+                                    There are currently no placement records available.
+                                    New records will appear here once registered.
                                 </p>
 
                                 <a href="{% url 'placements:placement_create' %}"
                                    class="btn btn-primary btn-sm">
-                                    Create First Placement
+                                    <i class="bi bi-plus-lg"></i> Create First Placement
                                 </a>
 
                             </td>
                         </tr>
-
                     </tbody>
 
                 </table>

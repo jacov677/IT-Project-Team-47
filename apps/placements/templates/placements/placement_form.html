@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block title %}Create Placement · WIL Placement System{% endblock %}
@@ -7,99 +6,254 @@
 
 <div class="container-fluid">
 
+    <!-- Page heading -->
     <div class="mb-4">
-        <h1 class="h3">Create Placement</h1>
-        <p class="text-body-secondary">
-            Assign a student to a workplace organisation and mentor.
-        </p>
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+            <div>
+                <h1 class="h3 fw-bold mb-1">Create New Placement</h1>
+                <p class="text-body-secondary mb-0">
+                    Register a student workplace placement and assign the relevant supervisors.
+                </p>
+            </div>
 
-        <a href="{% url 'placements:placement_list' %}"
-           class="btn btn-outline-secondary btn-sm">
-            Back to Placements
-        </a>
+            <a href="{% url 'placements:placement_list' %}"
+               class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Placements
+            </a>
+        </div>
     </div>
 
-    <div class="card shadow-sm border-0">
-        <div class="card-body p-4">
+    <!-- Form introduction -->
+    <div class="alert alert-info border-0 mb-4">
+        <div class="d-flex gap-2">
+            <i class="bi bi-info-circle-fill mt-1"></i>
+            <div>
+                <strong>Placement Registration</strong>
+                <p class="small mb-0">
+                    Complete the placement information below to prepare a new
+                    workplace placement record.
+                </p>
+            </div>
+        </div>
+    </div>
 
-            <h5 class="mb-4">Placement Information</h5>
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
 
             <form>
 
-                <div class="row g-3">
+                <!-- Student details -->
+                <div class="mb-4">
 
-                    <div class="col-md-6">
-                        <label class="form-label">Student Number</label>
-                        <input type="text" class="form-control"
-                               placeholder="Enter student number">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="rounded-3 bg-primary-subtle text-primary p-2">
+                            <i class="bi bi-person fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-semibold mb-0">1. Student Information</h5>
+                            <p class="text-body-secondary small mb-0">
+                                Identify the student receiving the placement.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label">Student Name</label>
-                        <input type="text" class="form-control"
-                               placeholder="Student name" disabled>
-                    </div>
+                    <div class="row g-3">
 
-                    <div class="col-md-6">
-                        <label class="form-label">Host Organisation</label>
-                        <select class="form-select">
-                            <option selected disabled>Select organisation</option>
-                            <option>Organisation records will load from database</option>
-                        </select>
-                    </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Student Number <span class="text-danger">*</span>
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Enter student number"
+                                   required>
+                            <div class="form-text">
+                                Enter the student's registered student number.
+                            </div>
+                        </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label">Assigned Mentor</label>
-                        <select class="form-select">
-                            <option selected disabled>Select mentor</option>
-                            <option>Mentor records will load from database</option>
-                        </select>
-                    </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Student Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Student name will appear here"
+                                   disabled>
+                            <div class="form-text">
+                                Student details will be retrieved from the database.
+                            </div>
+                        </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label">Start Date</label>
-                        <input type="date" class="form-control">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">End Date</label>
-                        <input type="date" class="form-control">
-                    </div>
-
-                    <div class="col-md-12">
-                        <label class="form-label">Placement Status</label>
-                        <select class="form-select">
-                            <option selected>Pending</option>
-                            <option>Approved</option>
-                            <option>Rejected</option>
-                        </select>
                     </div>
 
                 </div>
 
                 <hr class="my-4">
 
-                <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-primary" disabled>
-                        Create Placement
-                    </button>
+                <!-- Organisation and mentor -->
+                <div class="mb-4">
 
-                    <a href="{% url 'placements:placement_list' %}"
-                       class="btn btn-outline-secondary">
-                        Cancel
-                    </a>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="rounded-3 bg-info-subtle text-info p-2">
+                            <i class="bi bi-building fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-semibold mb-0">2. Organisation and Mentor</h5>
+                            <p class="text-body-secondary small mb-0">
+                                Select the host organisation and assigned workplace mentor.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Host Organisation <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" required>
+                                <option selected disabled value="">
+                                    Select host organisation
+                                </option>
+                                <option disabled>
+                                    Organisation records will load from database
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Assigned Mentor <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" required>
+                                <option selected disabled value="">
+                                    Select workplace mentor
+                                </option>
+                                <option disabled>
+                                    Mentor records will load from database
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <p class="text-body-secondary small mt-3 mb-0">
-                    Database integration will be added after the shared models
-                    and placement workflow are finalised.
-                </p>
+                <hr class="my-4">
+
+                <!-- Placement duration -->
+                <div class="mb-4">
+
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="rounded-3 bg-success-subtle text-success p-2">
+                            <i class="bi bi-calendar-range fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-semibold mb-0">3. Placement Duration</h5>
+                            <p class="text-body-secondary small mb-0">
+                                Specify the expected workplace placement period.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Start Date <span class="text-danger">*</span>
+                            </label>
+                            <input type="date"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                End Date <span class="text-danger">*</span>
+                            </label>
+                            <input type="date"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <!-- Placement status -->
+                <div class="mb-4">
+
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="rounded-3 bg-warning-subtle text-warning p-2">
+                            <i class="bi bi-clipboard-check fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-semibold mb-0">4. Placement Status</h5>
+                            <p class="text-body-secondary small mb-0">
+                                Set the initial status of this placement record.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Initial Status
+                            </label>
+                            <select class="form-select">
+                                <option selected>Pending</option>
+                                <option>Approved</option>
+                                <option>Rejected</option>
+                            </select>
+                            <div class="form-text">
+                                Pending placements will require coordinator approval.
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Form actions -->
+                <div class="border-top pt-4 mt-4">
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                        <p class="text-body-secondary small mb-0">
+                            <i class="bi bi-shield-lock"></i>
+                            Placement submission will be enabled after database integration.
+                        </p>
+
+                        <div class="d-flex gap-2">
+
+                            <a href="{% url 'placements:placement_list' %}"
+                               class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    disabled>
+                                <i class="bi bi-check-circle"></i>
+                                Create Placement
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </form>
 
         </div>
+
     </div>
 
 </div>
 
 {% endblock %}
+
