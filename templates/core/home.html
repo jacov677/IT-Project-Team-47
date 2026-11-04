@@ -10,9 +10,13 @@
     <!-- Welcome Section -->
     <div class="card border-0 shadow-sm mb-4"
          style="background: linear-gradient(120deg, #172554, #1e40af); color: white;">
+
         <div class="card-body p-4 p-lg-5">
+
             <div class="row align-items-center">
+
                 <div class="col-lg-8">
+
                     <p class="text-uppercase small fw-semibold mb-2"
                        style="letter-spacing: 1.5px; color: #bfdbfe;">
                         IT Project Team 47
@@ -27,9 +31,11 @@
                         and coordinate work-integrated learning activities
                         through one central platform.
                     </p>
+
                 </div>
 
                 <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+
                     <a href="{% url 'placements:placement_create' %}"
                        class="btn btn-light fw-semibold me-2 mb-2">
                         Create Placement
@@ -39,19 +45,23 @@
                        class="btn btn-outline-light mb-2">
                         View Placements
                     </a>
+
                 </div>
+
             </div>
+
         </div>
     </div>
 
-    <!-- Dashboard Statistics -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <div>
-            <h2 class="h5 fw-bold mb-1">System Overview</h2>
-            <p class="text-body-secondary small mb-0">
-                A summary of placement management activities.
-            </p>
-        </div>
+    <!-- System Statistics -->
+    <div class="mb-3">
+
+        <h2 class="h5 fw-bold mb-1">System Overview</h2>
+
+        <p class="text-body-secondary small mb-0">
+            A summary of placement management activities.
+        </p>
+
     </div>
 
     <div class="row g-3 mb-4">
@@ -114,11 +124,181 @@
 
     </div>
 
+    <!-- Placement Status Overview -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+
+                <div>
+                    <h2 class="h5 fw-bold mb-1">
+                        Placement Status Overview
+                    </h2>
+
+                    <p class="text-body-secondary small mb-0">
+                        Monitor placements across their different stages.
+                    </p>
+                </div>
+
+                <a href="{% url 'placements:placement_list' %}"
+                   class="btn btn-sm btn-outline-primary">
+                    Manage Placements
+                </a>
+
+            </div>
+
+            <div class="row g-3">
+
+                <!-- Pending -->
+                <div class="col-sm-6 col-lg">
+
+                    <div class="p-3 rounded-3 h-100"
+                         style="background-color: #fff8e7; border: 1px solid #f5e5b8;">
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="rounded-circle"
+                                  style="width: 10px; height: 10px; background-color: #d69e21;">
+                            </span>
+
+                            <span class="small fw-semibold text-dark">
+                                Pending
+                            </span>
+                        </div>
+
+                        <h3 class="fw-bold mb-1 text-dark">—</h3>
+
+                        <p class="small text-body-secondary mb-0">
+                            Awaiting approval
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Approved -->
+                <div class="col-sm-6 col-lg">
+
+                    <div class="p-3 rounded-3 h-100"
+                         style="background-color: #eaf3ff; border: 1px solid #cfe1fa;">
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="rounded-circle"
+                                  style="width: 10px; height: 10px; background-color: #3578c8;">
+                            </span>
+
+                            <span class="small fw-semibold text-dark">
+                                Approved
+                            </span>
+                        </div>
+
+                        <h3 class="fw-bold mb-1 text-dark">—</h3>
+
+                        <p class="small text-body-secondary mb-0">
+                            Approved placements
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Active -->
+                <div class="col-sm-6 col-lg">
+
+                    <div class="p-3 rounded-3 h-100"
+                         style="background-color: #e8f7ef; border: 1px solid #c7ead5;">
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="rounded-circle"
+                                  style="width: 10px; height: 10px; background-color: #26965b;">
+                            </span>
+
+                            <span class="small fw-semibold text-dark">
+                                Active
+                            </span>
+                        </div>
+
+                        <h3 class="fw-bold mb-1 text-dark">—</h3>
+
+                        <p class="small text-body-secondary mb-0">
+                            Ongoing placements
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Completed -->
+                <div class="col-sm-6 col-lg">
+
+                    <div class="p-3 rounded-3 h-100"
+                         style="background-color: #f0edff; border: 1px solid #ddd5fa;">
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="rounded-circle"
+                                  style="width: 10px; height: 10px; background-color: #7955c8;">
+                            </span>
+
+                            <span class="small fw-semibold text-dark">
+                                Completed
+                            </span>
+                        </div>
+
+                        <h3 class="fw-bold mb-1 text-dark">—</h3>
+
+                        <p class="small text-body-secondary mb-0">
+                            Finished placements
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Rejected -->
+                <div class="col-sm-6 col-lg">
+
+                    <div class="p-3 rounded-3 h-100"
+                         style="background-color: #fff0f0; border: 1px solid #f4d1d1;">
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="rounded-circle"
+                                  style="width: 10px; height: 10px; background-color: #cc4b4b;">
+                            </span>
+
+                            <span class="small fw-semibold text-dark">
+                                Rejected
+                            </span>
+                        </div>
+
+                        <h3 class="fw-bold mb-1 text-dark">—</h3>
+
+                        <p class="small text-body-secondary mb-0">
+                            Rejected requests
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mt-3 pt-3 border-top">
+                <p class="text-body-secondary small mb-0">
+                    Placement statistics will become available after database integration.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
     <!-- Quick Actions -->
     <div class="card border-0 shadow-sm mb-4">
+
         <div class="card-body p-4">
 
             <h2 class="h5 fw-bold mb-1">Quick Actions</h2>
+
             <p class="text-body-secondary small mb-3">
                 Access frequently used system functions.
             </p>
@@ -154,17 +334,22 @@
                 </div>
 
             </div>
+
         </div>
+
     </div>
 
     <!-- System Modules -->
     <div class="mb-4">
 
         <div class="mb-3">
+
             <h2 class="h5 fw-bold mb-1">System Modules</h2>
+
             <p class="text-body-secondary small mb-0">
                 Navigate through the main components of the WIL system.
             </p>
+
         </div>
 
         <div class="row g-3">
@@ -172,16 +357,22 @@
             {% for url_name, name, description in modules %}
 
             <div class="col-md-6 col-xl-4">
+
                 <a href="{% url url_name %}"
                    class="card border-0 shadow-sm h-100 text-decoration-none text-reset">
 
                     <div class="card-body p-4">
 
                         <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h3 class="h6 fw-bold mb-0">{{ name }}</h3>
+
+                            <h3 class="h6 fw-bold mb-0">
+                                {{ name }}
+                            </h3>
+
                             <span class="badge bg-light text-primary">
                                 Open Module
                             </span>
+
                         </div>
 
                         <p class="text-body-secondary small mb-0">
@@ -189,7 +380,9 @@
                         </p>
 
                     </div>
+
                 </a>
+
             </div>
 
             {% empty %}
@@ -203,6 +396,7 @@
             {% endfor %}
 
         </div>
+
     </div>
 
     <!-- Recent Activities -->
@@ -211,8 +405,12 @@
         <div class="card-body p-4">
 
             <div class="d-flex justify-content-between align-items-center mb-3">
+
                 <div>
-                    <h2 class="h5 fw-bold mb-1">Recent System Activities</h2>
+                    <h2 class="h5 fw-bold mb-1">
+                        Recent System Activities
+                    </h2>
+
                     <p class="text-body-secondary small mb-0">
                         Latest recorded actions across the system.
                     </p>
@@ -222,9 +420,11 @@
                    class="btn btn-sm btn-outline-secondary">
                     View Audit Log
                 </a>
+
             </div>
 
             <div class="text-center py-4">
+
                 <h3 class="h6 text-body-secondary">
                     No recent activities to display
                 </h3>
@@ -233,22 +433,28 @@
                     System activities will appear here once audit logging
                     and database integration are implemented.
                 </p>
+
             </div>
 
         </div>
+
     </div>
 
     <!-- Footer Information -->
     <div class="text-center py-3">
+
         <p class="text-body-secondary small mb-1">
             WIL Placement Management System
         </p>
+
         <p class="text-body-secondary small mb-0">
             Richfield Graduate Institute of Technology · IT Project Team 47
         </p>
+
     </div>
 
 </div>
 
 {% endblock %}
+
 
