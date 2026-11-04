@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Audit Log · WIL Placement System{% endblock %}
@@ -7,54 +8,96 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
         <div>
-            <h1 class="h3">System Audit Log</h1>
-            <p class="text-body-secondary">
-                Monitor and review activities performed within the WIL Placement System.
+            <h1 class="h3 mb-1">System Audit Log</h1>
+            <p class="text-body-secondary mb-0">
+                Track and review activities performed across the WIL Placement System.
             </p>
         </div>
 
         <a href="{% url 'core:home' %}" class="btn btn-outline-secondary">
-            Back to Home
+            <i class="bi bi-arrow-left me-1"></i> Back to Home
         </a>
+    </div>
+
+    <!-- Integration Status -->
+    <div class="d-flex align-items-center gap-2 mb-4">
+        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">
+            Awaiting database integration
+        </span>
+        <small class="text-body-secondary">
+            Audit tracking will become available once the shared database model is integrated.
+        </small>
     </div>
 
     <!-- Summary Cards -->
     <div class="row g-3 mb-4">
 
-        <div class="col-md-3">
-            <div class="card shadow-sm h-100">
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-sm h-100 border-0">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Total Activities</p>
-                    <h3 class="mb-0">—</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary mb-1">Total Activities</p>
+                            <h3 class="mb-0">—</h3>
+                        </div>
+                        <div class="rounded-3 bg-primary-subtle text-primary p-3">
+                            <i class="bi bi-activity fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">All recorded system activities</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm h-100">
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-sm h-100 border-0">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Today's Activities</p>
-                    <h3 class="mb-0">—</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary mb-1">Today's Activities</p>
+                            <h3 class="mb-0">—</h3>
+                        </div>
+                        <div class="rounded-3 bg-success-subtle text-success p-3">
+                            <i class="bi bi-calendar-check fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Activities recorded today</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm h-100">
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-sm h-100 border-0">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Registered Users</p>
-                    <h3 class="mb-0">—</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary mb-1">Registered Users</p>
+                            <h3 class="mb-0">—</h3>
+                        </div>
+                        <div class="rounded-3 bg-info-subtle text-info p-3">
+                            <i class="bi bi-people fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Users associated with activity records</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm h-100">
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-sm h-100 border-0">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Recorded Modules</p>
-                    <h3 class="mb-0">—</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary mb-1">Recorded Modules</p>
+                            <h3 class="mb-0">—</h3>
+                        </div>
+                        <div class="rounded-3 bg-warning-subtle text-warning-emphasis p-3">
+                            <i class="bi bi-grid fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Modules represented in the audit log</small>
                 </div>
             </div>
         </div>
@@ -62,17 +105,20 @@
     </div>
 
     <!-- Filters -->
-    <div class="card shadow-sm mb-4">
+    <div class="card shadow-sm border-0 mb-4">
 
-        <div class="card-header">
-            <h2 class="h6 mb-0">Filter Audit Records</h2>
+        <div class="card-header bg-white py-3">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-funnel text-primary"></i>
+                <h2 class="h6 mb-0">Filter Audit Records</h2>
+            </div>
         </div>
 
         <div class="card-body">
 
             <div class="row g-3">
 
-                <div class="col-md-3">
+                <div class="col-md-6 col-xl-3">
                     <label class="form-label">User ID</label>
                     <input type="text"
                            class="form-control"
@@ -80,7 +126,7 @@
                            disabled>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6 col-xl-3">
                     <label class="form-label">Action</label>
                     <select class="form-select" disabled>
                         <option selected>All Actions</option>
@@ -92,7 +138,7 @@
                     </select>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6 col-xl-3">
                     <label class="form-label">Module / Table</label>
                     <select class="form-select" disabled>
                         <option selected>All Modules</option>
@@ -101,21 +147,22 @@
                         <option>Organisations</option>
                         <option>Logbook</option>
                         <option>Assessments</option>
+                        <option>Reports</option>
                     </select>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6 col-xl-3">
                     <label class="form-label">Date</label>
                     <input type="date" class="form-control" disabled>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 d-flex flex-wrap gap-2">
                     <button class="btn btn-primary" disabled>
-                        Apply Filters
+                        <i class="bi bi-search me-1"></i> Apply Filters
                     </button>
 
-                    <button class="btn btn-outline-secondary ms-2" disabled>
-                        Reset
+                    <button class="btn btn-outline-secondary" disabled>
+                        <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
                     </button>
                 </div>
 
@@ -124,24 +171,31 @@
         </div>
     </div>
 
-    <!-- Audit Records Table -->
-    <div class="card shadow-sm">
+    <!-- Audit Records -->
+    <div class="card shadow-sm border-0">
 
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h2 class="h6 mb-0">Recorded System Activities</h2>
+        <div class="card-header bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div>
+                    <h2 class="h6 mb-1">Recorded System Activities</h2>
+                    <small class="text-body-secondary">
+                        A chronological record of user and system actions.
+                    </small>
+                </div>
 
-            <button class="btn btn-outline-success btn-sm" disabled>
-                Export Audit Log
-            </button>
+                <button class="btn btn-outline-success btn-sm" disabled>
+                    <i class="bi bi-download me-1"></i> Export Audit Log
+                </button>
+            </div>
         </div>
 
         <div class="card-body">
 
             <div class="table-responsive">
 
-                <table class="table table-hover align-middle">
+                <table class="table table-hover align-middle mb-0">
 
-                    <thead>
+                    <thead class="table-light">
                         <tr>
                             <th>Log ID</th>
                             <th>User ID</th>
@@ -154,8 +208,15 @@
 
                     <tbody>
                         <tr>
-                            <td colspan="6" class="text-center text-body-secondary py-4">
-                                Audit records will appear here once database integration is complete.
+                            <td colspan="6" class="text-center py-5">
+                                <div class="mb-3">
+                                    <i class="bi bi-journal-text display-5 text-body-secondary"></i>
+                                </div>
+                                <h6 class="mb-1">No audit records available</h6>
+                                <p class="text-body-secondary small mb-0">
+                                    System activities will appear here once database integration
+                                    and audit tracking have been implemented.
+                                </p>
                             </td>
                         </tr>
                     </tbody>
@@ -165,13 +226,28 @@
             </div>
 
         </div>
+
+        <div class="card-footer bg-white">
+            <small class="text-body-secondary">
+                Audit records will be displayed in chronological order once available.
+            </small>
+        </div>
+
     </div>
 
     <!-- Development Notice -->
-    <div class="alert alert-info mt-4">
-        <strong>Development note:</strong>
-        Audit records, activity tracking, filtering and exporting will be implemented
-        once the shared AuditLog database model and backend functionality are ready.
+    <div class="alert alert-info mt-4 mb-0">
+        <div class="d-flex gap-2">
+            <i class="bi bi-info-circle fs-5"></i>
+            <div>
+                <strong>Development notice</strong>
+                <p class="mb-0 small">
+                    Activity tracking, audit record retrieval, filtering and exporting
+                    are pending integration with the shared AuditLog database model
+                    and backend functionality.
+                </p>
+            </div>
+        </div>
     </div>
 
 </div>
