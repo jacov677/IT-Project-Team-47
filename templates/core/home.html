@@ -1,5 +1,5 @@
 
-{% extends "base.html" %}
+ {% extends "base.html" %}
 
 {% block title %}Coordinator Dashboard · WIL Placement System{% endblock %}
 
@@ -10,58 +10,42 @@
     <!-- Welcome Section -->
     <div class="card border-0 shadow-sm mb-4"
          style="background: linear-gradient(120deg, #172554, #1e40af); color: white;">
-
         <div class="card-body p-4 p-lg-5">
-
             <div class="row align-items-center">
-
                 <div class="col-lg-8">
-
                     <p class="text-uppercase small fw-semibold mb-2"
                        style="letter-spacing: 1.5px; color: #bfdbfe;">
                         IT Project Team 47
                     </p>
-
                     <h1 class="h2 fw-bold mb-2">
                         WIL Placement Management System
                     </h1>
-
                     <p class="mb-0" style="color: #dbeafe;">
                         Manage workplace placements, monitor student progress
                         and coordinate work-integrated learning activities
                         through one central platform.
                     </p>
-
                 </div>
-
                 <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
-
                     <a href="{% url 'placements:placement_create' %}"
                        class="btn btn-light fw-semibold me-2 mb-2">
                         Create Placement
                     </a>
-
                     <a href="{% url 'placements:placement_list' %}"
                        class="btn btn-outline-light mb-2">
                         View Placements
                     </a>
-
                 </div>
-
             </div>
-
         </div>
     </div>
 
     <!-- System Statistics -->
     <div class="mb-3">
-
         <h2 class="h5 fw-bold mb-1">System Overview</h2>
-
         <p class="text-body-secondary small mb-0">
             A summary of placement management activities.
         </p>
-
     </div>
 
     <div class="row g-3 mb-4">
@@ -69,13 +53,9 @@
         <div class="col-sm-6 col-xl-3">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary small mb-2">
-                        Total Students
-                    </p>
+                    <p class="text-body-secondary small mb-2">Total Students</p>
                     <h3 class="fw-bold mb-1">—</h3>
-                    <span class="text-body-secondary small">
-                        Registered student accounts
-                    </span>
+                    <span class="text-body-secondary small">Registered student accounts</span>
                 </div>
             </div>
         </div>
@@ -83,13 +63,9 @@
         <div class="col-sm-6 col-xl-3">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary small mb-2">
-                        Active Placements
-                    </p>
+                    <p class="text-body-secondary small mb-2">Active Placements</p>
                     <h3 class="fw-bold mb-1">—</h3>
-                    <span class="text-body-secondary small">
-                        Currently active placements
-                    </span>
+                    <span class="text-body-secondary small">Currently active placements</span>
                 </div>
             </div>
         </div>
@@ -97,13 +73,9 @@
         <div class="col-sm-6 col-xl-3">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary small mb-2">
-                        Pending Approvals
-                    </p>
+                    <p class="text-body-secondary small mb-2">Pending Approvals</p>
                     <h3 class="fw-bold mb-1">—</h3>
-                    <span class="text-body-secondary small">
-                        Awaiting coordinator review
-                    </span>
+                    <span class="text-body-secondary small">Awaiting coordinator review</span>
                 </div>
             </div>
         </div>
@@ -111,13 +83,9 @@
         <div class="col-sm-6 col-xl-3">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary small mb-2">
-                        Host Organisations
-                    </p>
+                    <p class="text-body-secondary small mb-2">Host Organisations</p>
                     <h3 class="fw-bold mb-1">—</h3>
-                    <span class="text-body-secondary small">
-                        Registered workplace partners
-                    </span>
+                    <span class="text-body-secondary small">Registered workplace partners</span>
                 </div>
             </div>
         </div>
@@ -126,158 +94,81 @@
 
     <!-- Placement Status Overview -->
     <div class="card border-0 shadow-sm mb-4">
-
         <div class="card-body p-4">
 
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
-
                 <div>
-                    <h2 class="h5 fw-bold mb-1">
-                        Placement Status Overview
-                    </h2>
-
+                    <h2 class="h5 fw-bold mb-1">Placement Status Overview</h2>
                     <p class="text-body-secondary small mb-0">
                         Monitor placements across their different stages.
                     </p>
                 </div>
-
                 <a href="{% url 'placements:placement_list' %}"
                    class="btn btn-sm btn-outline-primary">
                     Manage Placements
                 </a>
-
             </div>
 
             <div class="row g-3">
 
-                <!-- Pending -->
                 <div class="col-sm-6 col-lg">
-
                     <div class="p-3 rounded-3 h-100"
                          style="background-color: #fff8e7; border: 1px solid #f5e5b8;">
-
                         <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="rounded-circle"
-                                  style="width: 10px; height: 10px; background-color: #d69e21;">
-                            </span>
-
-                            <span class="small fw-semibold text-dark">
-                                Pending
-                            </span>
+                            <span class="rounded-circle" style="width: 10px; height: 10px; background-color: #d69e21;"></span>
+                            <span class="small fw-semibold text-dark">Pending</span>
                         </div>
-
                         <h3 class="fw-bold mb-1 text-dark">—</h3>
-
-                        <p class="small text-body-secondary mb-0">
-                            Awaiting approval
-                        </p>
-
+                        <p class="small text-body-secondary mb-0">Awaiting approval</p>
                     </div>
-
                 </div>
 
-                <!-- Approved -->
                 <div class="col-sm-6 col-lg">
-
                     <div class="p-3 rounded-3 h-100"
                          style="background-color: #eaf3ff; border: 1px solid #cfe1fa;">
-
                         <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="rounded-circle"
-                                  style="width: 10px; height: 10px; background-color: #3578c8;">
-                            </span>
-
-                            <span class="small fw-semibold text-dark">
-                                Approved
-                            </span>
+                            <span class="rounded-circle" style="width: 10px; height: 10px; background-color: #3578c8;"></span>
+                            <span class="small fw-semibold text-dark">Approved</span>
                         </div>
-
                         <h3 class="fw-bold mb-1 text-dark">—</h3>
-
-                        <p class="small text-body-secondary mb-0">
-                            Approved placements
-                        </p>
-
+                        <p class="small text-body-secondary mb-0">Approved placements</p>
                     </div>
-
                 </div>
 
-                <!-- Active -->
                 <div class="col-sm-6 col-lg">
-
                     <div class="p-3 rounded-3 h-100"
                          style="background-color: #e8f7ef; border: 1px solid #c7ead5;">
-
                         <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="rounded-circle"
-                                  style="width: 10px; height: 10px; background-color: #26965b;">
-                            </span>
-
-                            <span class="small fw-semibold text-dark">
-                                Active
-                            </span>
+                            <span class="rounded-circle" style="width: 10px; height: 10px; background-color: #26965b;"></span>
+                            <span class="small fw-semibold text-dark">Active</span>
                         </div>
-
                         <h3 class="fw-bold mb-1 text-dark">—</h3>
-
-                        <p class="small text-body-secondary mb-0">
-                            Ongoing placements
-                        </p>
-
+                        <p class="small text-body-secondary mb-0">Ongoing placements</p>
                     </div>
-
                 </div>
 
-                <!-- Completed -->
                 <div class="col-sm-6 col-lg">
-
                     <div class="p-3 rounded-3 h-100"
                          style="background-color: #f0edff; border: 1px solid #ddd5fa;">
-
                         <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="rounded-circle"
-                                  style="width: 10px; height: 10px; background-color: #7955c8;">
-                            </span>
-
-                            <span class="small fw-semibold text-dark">
-                                Completed
-                            </span>
+                            <span class="rounded-circle" style="width: 10px; height: 10px; background-color: #7955c8;"></span>
+                            <span class="small fw-semibold text-dark">Completed</span>
                         </div>
-
                         <h3 class="fw-bold mb-1 text-dark">—</h3>
-
-                        <p class="small text-body-secondary mb-0">
-                            Finished placements
-                        </p>
-
+                        <p class="small text-body-secondary mb-0">Finished placements</p>
                     </div>
-
                 </div>
 
-                <!-- Rejected -->
                 <div class="col-sm-6 col-lg">
-
                     <div class="p-3 rounded-3 h-100"
                          style="background-color: #fff0f0; border: 1px solid #f4d1d1;">
-
                         <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="rounded-circle"
-                                  style="width: 10px; height: 10px; background-color: #cc4b4b;">
-                            </span>
-
-                            <span class="small fw-semibold text-dark">
-                                Rejected
-                            </span>
+                            <span class="rounded-circle" style="width: 10px; height: 10px; background-color: #cc4b4b;"></span>
+                            <span class="small fw-semibold text-dark">Rejected</span>
                         </div>
-
                         <h3 class="fw-bold mb-1 text-dark">—</h3>
-
-                        <p class="small text-body-secondary mb-0">
-                            Rejected requests
-                        </p>
-
+                        <p class="small text-body-secondary mb-0">Rejected requests</p>
                     </div>
-
                 </div>
 
             </div>
@@ -289,172 +180,227 @@
             </div>
 
         </div>
+    </div>
 
+    <!-- Notifications and Reminders -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                <div>
+                    <h2 class="h5 fw-bold mb-1">Notifications & Reminders</h2>
+                    <p class="text-body-secondary small mb-0">
+                        Important activities requiring coordinator attention.
+                    </p>
+                </div>
+                <span class="badge bg-light text-secondary border">
+                    Coming with database integration
+                </span>
+            </div>
+
+            <div class="row g-3">
+
+                <!-- Pending Approvals -->
+                <div class="col-md-4">
+                    <div class="rounded-3 p-3 h-100"
+                         style="background-color: #fff9eb; border: 1px solid #f3e4bd;">
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <div class="rounded-3 d-flex align-items-center justify-content-center"
+                                 style="width: 38px; height: 38px; background-color: #ffedc2;">
+                                <span class="fw-bold text-dark">!</span>
+                            </div>
+                            <span class="small fw-bold text-dark">Pending Approvals</span>
+                        </div>
+
+                        <h3 class="h5 fw-bold text-dark mb-2">— Requests awaiting review</h3>
+
+                        <p class="small text-body-secondary mb-3">
+                            Placement requests that require coordinator approval or rejection.
+                        </p>
+
+                        <a href="{% url 'placements:placement_list' %}"
+                           class="small fw-semibold text-decoration-none">
+                            Review placements →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Upcoming End Dates -->
+                <div class="col-md-4">
+                    <div class="rounded-3 p-3 h-100"
+                         style="background-color: #edf5ff; border: 1px solid #d2e3f8;">
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <div class="rounded-3 d-flex align-items-center justify-content-center"
+                                 style="width: 38px; height: 38px; background-color: #d9eaff;">
+                                <span class="fw-bold text-primary">◷</span>
+                            </div>
+                            <span class="small fw-bold text-dark">Upcoming End Dates</span>
+                        </div>
+
+                        <h3 class="h5 fw-bold text-dark mb-2">— Placements nearing completion</h3>
+
+                        <p class="small text-body-secondary mb-3">
+                            Monitor placements approaching their scheduled end dates.
+                        </p>
+
+                        <a href="{% url 'placements:placement_list' %}"
+                           class="small fw-semibold text-decoration-none">
+                            View placements →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Outstanding Evaluations -->
+                <div class="col-md-4">
+                    <div class="rounded-3 p-3 h-100"
+                         style="background-color: #f4efff; border: 1px solid #e1d7f5;">
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <div class="rounded-3 d-flex align-items-center justify-content-center"
+                                 style="width: 38px; height: 38px; background-color: #e7dcff;">
+                                <span class="fw-bold" style="color: #7045b5;">✓</span>
+                            </div>
+                            <span class="small fw-bold text-dark">Outstanding Evaluations</span>
+                        </div>
+
+                        <h3 class="h5 fw-bold text-dark mb-2">— Evaluations still required</h3>
+
+                        <p class="small text-body-secondary mb-3">
+                            Track placements awaiting mentor evaluations and final assessments.
+                        </p>
+
+                        <a href="{% url 'assessments:index' %}"
+                           class="small fw-semibold text-decoration-none">
+                            View assessments →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-3 pt-3 border-top">
+                <p class="text-body-secondary small mb-0">
+                    Notification counts and automated reminders will be populated once
+                    placement, assessment and database functionality are integrated.
+                </p>
+            </div>
+
+        </div>
     </div>
 
     <!-- Quick Actions -->
     <div class="card border-0 shadow-sm mb-4">
-
         <div class="card-body p-4">
-
             <h2 class="h5 fw-bold mb-1">Quick Actions</h2>
-
             <p class="text-body-secondary small mb-3">
                 Access frequently used system functions.
             </p>
 
             <div class="row g-3">
-
                 <div class="col-md-6 col-xl-3">
                     <a href="{% url 'placements:placement_create' %}"
                        class="btn btn-outline-primary w-100 py-3">
                         Create New Placement
                     </a>
                 </div>
-
                 <div class="col-md-6 col-xl-3">
                     <a href="{% url 'placements:placement_list' %}"
                        class="btn btn-outline-primary w-100 py-3">
                         Manage Placements
                     </a>
                 </div>
-
                 <div class="col-md-6 col-xl-3">
                     <a href="{% url 'reports:index' %}"
                        class="btn btn-outline-primary w-100 py-3">
                         View Reports
                     </a>
                 </div>
-
                 <div class="col-md-6 col-xl-3">
                     <a href="{% url 'core:audit_log' %}"
                        class="btn btn-outline-primary w-100 py-3">
                         Review Audit Log
                     </a>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- System Modules -->
     <div class="mb-4">
-
         <div class="mb-3">
-
             <h2 class="h5 fw-bold mb-1">System Modules</h2>
-
             <p class="text-body-secondary small mb-0">
                 Navigate through the main components of the WIL system.
             </p>
-
         </div>
 
         <div class="row g-3">
-
             {% for url_name, name, description in modules %}
-
             <div class="col-md-6 col-xl-4">
-
                 <a href="{% url url_name %}"
                    class="card border-0 shadow-sm h-100 text-decoration-none text-reset">
-
                     <div class="card-body p-4">
-
                         <div class="d-flex justify-content-between align-items-start mb-3">
-
-                            <h3 class="h6 fw-bold mb-0">
-                                {{ name }}
-                            </h3>
-
-                            <span class="badge bg-light text-primary">
-                                Open Module
-                            </span>
-
+                            <h3 class="h6 fw-bold mb-0">{{ name }}</h3>
+                            <span class="badge bg-light text-primary">Open Module</span>
                         </div>
-
-                        <p class="text-body-secondary small mb-0">
-                            {{ description }}
-                        </p>
-
+                        <p class="text-body-secondary small mb-0">{{ description }}</p>
                     </div>
-
                 </a>
-
             </div>
-
             {% empty %}
-
             <div class="col-12">
                 <div class="alert alert-secondary mb-0">
                     No system modules are currently available.
                 </div>
             </div>
-
             {% endfor %}
-
         </div>
-
     </div>
 
     <!-- Recent Activities -->
     <div class="card border-0 shadow-sm mb-4">
-
         <div class="card-body p-4">
 
             <div class="d-flex justify-content-between align-items-center mb-3">
-
                 <div>
-                    <h2 class="h5 fw-bold mb-1">
-                        Recent System Activities
-                    </h2>
-
+                    <h2 class="h5 fw-bold mb-1">Recent System Activities</h2>
                     <p class="text-body-secondary small mb-0">
                         Latest recorded actions across the system.
                     </p>
                 </div>
-
                 <a href="{% url 'core:audit_log' %}"
                    class="btn btn-sm btn-outline-secondary">
                     View Audit Log
                 </a>
-
             </div>
 
             <div class="text-center py-4">
-
                 <h3 class="h6 text-body-secondary">
                     No recent activities to display
                 </h3>
-
                 <p class="text-body-secondary small mb-0">
                     System activities will appear here once audit logging
                     and database integration are implemented.
                 </p>
-
             </div>
 
         </div>
-
     </div>
 
     <!-- Footer Information -->
     <div class="text-center py-3">
-
         <p class="text-body-secondary small mb-1">
             WIL Placement Management System
         </p>
-
         <p class="text-body-secondary small mb-0">
             Richfield Graduate Institute of Technology · IT Project Team 47
         </p>
-
     </div>
 
 </div>
 
 {% endblock %}
-
 
