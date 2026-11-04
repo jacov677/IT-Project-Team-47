@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Completion Reports · WIL Placement System{% endblock %}
@@ -6,79 +7,86 @@
 
 <div class="container-fluid">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
         <div>
-            <h1 class="h3">Completion Reports</h1>
-            <p class="text-body-secondary">
-                Monitor student placement completion and final assessment results.
+            <h1 class="h3 fw-bold mb-1">Completion Reports</h1>
+            <p class="text-body-secondary mb-0">
+                Monitor student placement completion, mentor evaluations and final results.
             </p>
         </div>
 
         <a href="{% url 'reports:index' %}" class="btn btn-outline-secondary">
-            Back to Reports
+            ← Back to Reports
         </a>
     </div>
 
-    <!-- Summary Cards -->
+    <!-- Summary Statistics -->
     <div class="row g-3 mb-4">
 
-        <div class="col-md-3">
-            <div class="card shadow-sm h-100">
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Completed Placements</p>
-                    <h3 class="mb-0">—</h3>
+                    <p class="text-body-secondary mb-2">Completed Placements</p>
+                    <h2 class="fw-bold text-success mb-1">—</h2>
+                    <small class="text-body-secondary">Successfully completed</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm h-100">
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Pending Completion</p>
-                    <h3 class="mb-0">—</h3>
+                    <p class="text-body-secondary mb-2">Pending Completion</p>
+                    <h2 class="fw-bold text-warning mb-1">—</h2>
+                    <small class="text-body-secondary">Awaiting completion</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm h-100">
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Evaluations Submitted</p>
-                    <h3 class="mb-0">—</h3>
+                    <p class="text-body-secondary mb-2">Evaluations Submitted</p>
+                    <h2 class="fw-bold text-primary mb-1">—</h2>
+                    <small class="text-body-secondary">Mentor evaluations received</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm h-100">
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Final Results Captured</p>
-                    <h3 class="mb-0">—</h3>
+                    <p class="text-body-secondary mb-2">Final Results Captured</p>
+                    <h2 class="fw-bold text-info mb-1">—</h2>
+                    <small class="text-body-secondary">Assessment results recorded</small>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Filters -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header">
-            <h2 class="h6 mb-0">Filter Completion Reports</h2>
+    <!-- Completion Filters -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-white py-3">
+            <h5 class="mb-0 fw-semibold">Filter Completion Reports</h5>
         </div>
 
         <div class="card-body">
+
             <div class="row g-3">
 
-                <div class="col-md-4">
-                    <label class="form-label">Student Number</label>
+                <div class="col-lg-4 col-md-6">
+                    <label class="form-label fw-semibold">Student Number</label>
                     <input type="text"
                            class="form-control"
                            placeholder="Enter student number..."
                            disabled>
                 </div>
 
-                <div class="col-md-4">
-                    <label class="form-label">Completion Status</label>
+                <div class="col-lg-4 col-md-6">
+                    <label class="form-label fw-semibold">Completion Status</label>
                     <select class="form-select" disabled>
                         <option selected>All Statuses</option>
                         <option>Completed</option>
@@ -86,38 +94,50 @@
                     </select>
                 </div>
 
-                <div class="col-md-4">
-                    <label class="form-label">Completion Year</label>
+                <div class="col-lg-4 col-md-6">
+                    <label class="form-label fw-semibold">Completion Year</label>
                     <select class="form-select" disabled>
                         <option selected>All Years</option>
                     </select>
                 </div>
 
-                <div class="col-12">
-                    <button class="btn btn-primary" disabled>
-                        Generate Report
-                    </button>
-                    <button class="btn btn-outline-secondary ms-2" disabled>
-                        Export Report
-                    </button>
-                </div>
-
             </div>
+
+            <div class="mt-3">
+                <button class="btn btn-primary" disabled>
+                    Generate Report
+                </button>
+                <button class="btn btn-outline-secondary ms-2" disabled>
+                    Reset Filters
+                </button>
+            </div>
+
         </div>
     </div>
 
-    <!-- Completion Table -->
-    <div class="card shadow-sm">
-        <div class="card-header">
-            <h2 class="h6 mb-0">Student Completion Overview</h2>
+    <!-- Student Completion Records -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+                <h5 class="mb-1 fw-semibold">Student Completion Overview</h5>
+                <small class="text-body-secondary">
+                    Placement progress, mentor evaluations and final assessment results
+                </small>
+            </div>
+
+            <button class="btn btn-outline-success btn-sm" disabled>
+                Export Report
+            </button>
         </div>
 
         <div class="card-body">
 
             <div class="table-responsive">
+
                 <table class="table table-hover align-middle">
 
-                    <thead>
+                    <thead class="table-light">
                         <tr>
                             <th>Student Number</th>
                             <th>Student Name</th>
@@ -131,22 +151,28 @@
 
                     <tbody>
                         <tr>
-                            <td colspan="7" class="text-center text-body-secondary py-4">
-                                Student completion records will appear here once database integration is complete.
+                            <td colspan="7" class="text-center py-5">
+                                <div class="fs-1 text-secondary mb-2">✓</div>
+                                <h6 class="fw-semibold">No completion records available</h6>
+                                <p class="text-body-secondary small mb-0">
+                                    Student completion information will appear here once database integration is complete.
+                                </p>
                             </td>
                         </tr>
                     </tbody>
 
                 </table>
+
             </div>
 
         </div>
     </div>
 
-    <div class="alert alert-info mt-4">
-        <strong>Development note:</strong>
-        Completion statistics, evaluation tracking, final results and report exports
-        will be implemented during database integration.
+    <!-- Development Notice -->
+    <div class="alert alert-info mt-4 mb-0">
+        <strong>Development Status:</strong>
+        Completion statistics, evaluation tracking, final assessment results
+        and report exports are awaiting database integration.
     </div>
 
 </div>

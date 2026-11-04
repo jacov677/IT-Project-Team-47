@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Organisation Reports · WIL Placement System{% endblock %}
@@ -6,89 +7,108 @@
 
 <div class="container-fluid">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
         <div>
-            <h1 class="h3">Organisation Reports</h1>
-            <p class="text-body-secondary">
-                View host organisations and their student placement activity.
+            <h1 class="h3 fw-bold mb-1">Organisation Reports</h1>
+            <p class="text-body-secondary mb-0">
+                Monitor host organisations and their student placement activity.
             </p>
         </div>
 
         <a href="{% url 'reports:index' %}" class="btn btn-outline-secondary">
-            Back to Reports
+            ← Back to Reports
         </a>
     </div>
 
-    <!-- Summary Cards -->
+    <!-- Summary Statistics -->
     <div class="row g-3 mb-4">
 
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
+        <div class="col-xl-4 col-md-6">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Total Organisations</p>
-                    <h3 class="mb-0">—</h3>
+                    <p class="text-body-secondary mb-2">Total Organisations</p>
+                    <h2 class="fw-bold mb-1">—</h2>
+                    <small class="text-body-secondary">Registered host organisations</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
+        <div class="col-xl-4 col-md-6">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Active Host Organisations</p>
-                    <h3 class="mb-0">—</h3>
+                    <p class="text-body-secondary mb-2">Active Host Organisations</p>
+                    <h2 class="fw-bold text-success mb-1">—</h2>
+                    <small class="text-body-secondary">Organisations with active placements</small>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
+        <div class="col-xl-4 col-md-6">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-body-secondary mb-1">Total Student Placements</p>
-                    <h3 class="mb-0">—</h3>
+                    <p class="text-body-secondary mb-2">Total Student Placements</p>
+                    <h2 class="fw-bold text-primary mb-1">—</h2>
+                    <small class="text-body-secondary">Students assigned to host organisations</small>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Filters -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header">
-            <h2 class="h6 mb-0">Filter Organisation Reports</h2>
+    <!-- Organisation Filters -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-white py-3">
+            <h5 class="mb-0 fw-semibold">Filter Organisation Reports</h5>
         </div>
 
         <div class="card-body">
+
             <div class="row g-3">
 
-                <div class="col-md-5">
-                    <label class="form-label">Organisation Name</label>
+                <div class="col-lg-5 col-md-6">
+                    <label class="form-label fw-semibold">Organisation Name</label>
                     <input type="text"
                            class="form-control"
                            placeholder="Search organisation..."
                            disabled>
                 </div>
 
-                <div class="col-md-4">
-                    <label class="form-label">Industry</label>
+                <div class="col-lg-4 col-md-6">
+                    <label class="form-label fw-semibold">Industry</label>
                     <select class="form-select" disabled>
                         <option selected>All Industries</option>
                     </select>
                 </div>
 
-                <div class="col-md-3 d-flex align-items-end">
+                <div class="col-lg-3 col-md-12 d-flex align-items-end">
                     <button class="btn btn-primary w-100" disabled>
                         Search Organisations
                     </button>
                 </div>
 
             </div>
+
+            <div class="mt-3">
+                <button class="btn btn-outline-secondary btn-sm" disabled>
+                    Reset Filters
+                </button>
+            </div>
+
         </div>
     </div>
 
-    <!-- Organisation Table -->
-    <div class="card shadow-sm">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h2 class="h6 mb-0">Organisation Placement Overview</h2>
+    <!-- Organisation Records -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+                <h5 class="mb-1 fw-semibold">Organisation Placement Overview</h5>
+                <small class="text-body-secondary">
+                    Host organisation details and associated student placements
+                </small>
+            </div>
 
             <button class="btn btn-outline-success btn-sm" disabled>
                 Export Report
@@ -98,9 +118,10 @@
         <div class="card-body">
 
             <div class="table-responsive">
+
                 <table class="table table-hover align-middle">
 
-                    <thead>
+                    <thead class="table-light">
                         <tr>
                             <th>Organisation</th>
                             <th>Industry</th>
@@ -113,22 +134,28 @@
 
                     <tbody>
                         <tr>
-                            <td colspan="6" class="text-center text-body-secondary py-4">
-                                Organisation report data will appear here once database integration is complete.
+                            <td colspan="6" class="text-center py-5">
+                                <div class="fs-1 text-secondary mb-2">▤</div>
+                                <h6 class="fw-semibold">No organisation records available</h6>
+                                <p class="text-body-secondary small mb-0">
+                                    Organisation information will appear here once database integration is complete.
+                                </p>
                             </td>
                         </tr>
                     </tbody>
 
                 </table>
+
             </div>
 
         </div>
     </div>
 
-    <div class="alert alert-info mt-4">
-        <strong>Development note:</strong>
-        Organisation statistics, filtering and report exports will be implemented
-        during database integration.
+    <!-- Development Notice -->
+    <div class="alert alert-info mt-4 mb-0">
+        <strong>Development Status:</strong>
+        Organisation statistics, search filters and report exports
+        are awaiting integration with the shared database.
     </div>
 
 </div>
