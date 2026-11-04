@@ -1,4 +1,5 @@
 
+
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -63,6 +64,12 @@
             font-weight: 700;
         }
 
+        /* Mobile Navigation Button */
+        .wil-menu-button {
+            font-size: 1.2rem;
+            padding: 5px 11px;
+        }
+
         /* Main Layout */
         .wil-layout {
             display: flex;
@@ -80,15 +87,18 @@
 
         .wil-sidebar-heading {
             color: #8391a4;
-            font-size: 0.72rem;
+            font-size: 0.70rem;
             font-weight: 700;
             letter-spacing: 1px;
             padding: 0 12px;
-            margin-bottom: 12px;
+            margin: 8px 0 12px;
             text-transform: uppercase;
         }
 
         .wil-sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             color: #42546c;
             padding: 11px 13px;
             border-radius: 7px;
@@ -96,6 +106,7 @@
             font-size: 0.94rem;
             font-weight: 500;
             transition: background-color 0.2s, color 0.2s;
+            text-decoration: none;
         }
 
         .wil-sidebar .nav-link:hover {
@@ -107,6 +118,14 @@
             background-color: #dce9f8;
             color: var(--wil-navy);
             font-weight: 700;
+            border-left: 3px solid var(--wil-blue);
+        }
+
+        .wil-sidebar .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
         }
 
         .wil-sidebar-divider {
@@ -194,15 +213,14 @@
                 <div class="d-flex align-items-center gap-3">
 
                     <!-- Mobile Navigation Toggle -->
-                    <button class="navbar-toggler d-lg-none border border-light text-white"
+                    <button class="btn btn-outline-light d-lg-none wil-menu-button"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#wilSidebar"
                             aria-controls="wilSidebar"
                             aria-expanded="false"
                             aria-label="Toggle navigation">
-
-                        <span class="navbar-toggler-icon"></span>
+                        ☰
                     </button>
 
                     <a class="wil-brand" href="{% url 'core:home' %}">
@@ -250,43 +268,50 @@
         <aside class="wil-sidebar collapse d-lg-block" id="wilSidebar">
 
             <div class="wil-sidebar-heading">
-                Main Menu
+                Main Navigation
             </div>
 
             <nav class="nav flex-column">
 
-                <a class="nav-link"
+                <a class="nav-link {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}active{% endif %}"
                    href="{% url 'core:home' %}">
+                    <span class="nav-icon">⌂</span>
                     Dashboard
                 </a>
 
-                <a class="nav-link"
+                <a class="nav-link {% if request.resolver_match.app_name == 'accounts' %}active{% endif %}"
                    href="{% url 'accounts:index' %}">
+                    <span class="nav-icon">♙</span>
                     Accounts
                 </a>
 
-                <a class="nav-link"
+                <a class="nav-link {% if request.resolver_match.app_name == 'organisations' %}active{% endif %}"
                    href="{% url 'organisations:index' %}">
+                    <span class="nav-icon">▦</span>
                     Organisations
                 </a>
 
-                <a class="nav-link"
+                <a class="nav-link {% if request.resolver_match.app_name == 'placements' %}active{% endif %}"
                    href="{% url 'placements:index' %}">
+                    <span class="nav-icon">▣</span>
                     Placements
                 </a>
 
-                <a class="nav-link"
+                <a class="nav-link {% if request.resolver_match.app_name == 'logbook' %}active{% endif %}"
                    href="{% url 'logbook:index' %}">
+                    <span class="nav-icon">▤</span>
                     Logbook
                 </a>
 
-                <a class="nav-link"
+                <a class="nav-link {% if request.resolver_match.app_name == 'assessments' %}active{% endif %}"
                    href="{% url 'assessments:index' %}">
+                    <span class="nav-icon">✓</span>
                     Assessments
                 </a>
 
-                <a class="nav-link"
+                <a class="nav-link {% if request.resolver_match.app_name == 'reports' %}active{% endif %}"
                    href="{% url 'reports:index' %}">
+                    <span class="nav-icon">▥</span>
                     Reports
                 </a>
 
@@ -300,12 +325,25 @@
 
             <nav class="nav flex-column">
 
-                <a class="nav-link"
+                <a class="nav-link {% if request.resolver_match.url_name == 'audit_log' %}active{% endif %}"
                    href="{% url 'core:audit_log' %}">
+                    <span class="nav-icon">◉</span>
                     System Audit Log
                 </a>
 
             </nav>
+
+            <div class="wil-sidebar-divider"></div>
+
+            <div class="px-3 pt-2">
+                <p class="text-body-secondary small mb-1">
+                    WIL Placement System
+                </p>
+
+                <p class="text-body-secondary" style="font-size: 0.75rem;">
+                    IT Project Team 47
+                </p>
+            </div>
 
         </aside>
 
@@ -316,6 +354,7 @@
 
                 <!-- Django Messages -->
                 {% for message in messages %}
+
                     <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show"
                          role="alert">
 
@@ -328,12 +367,14 @@
                         </button>
 
                     </div>
+
                 {% endfor %}
 
                 <!-- Individual Page Content -->
                 {% block content %}
                 {% endblock %}
 
+                <!-- Footer -->
                 <footer class="wil-page-footer">
                     WIL Placement Management System · IT Project Team 47
                 </footer>
@@ -349,3 +390,4 @@
 
 </body>
 </html>
+
