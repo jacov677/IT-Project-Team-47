@@ -1,17 +1,254 @@
+
 {% extends "base.html" %}
+
+{% block title %}Coordinator Dashboard · WIL Placement System{% endblock %}
+
 {% block content %}
-<h1 class="h3 mb-1">WIL Placement Management System</h1>
-<p class="text-body-secondary mb-4">IT Project Team 47 · Richfield Graduate Institute of Technology</p>
-<div class="row g-3">
-  {% for url_name, name, description in modules %}
-  <div class="col-md-6 col-lg-4">
-    <a class="card h-100 text-decoration-none" href="{% url url_name %}">
-      <div class="card-body">
-        <h2 class="h5 mb-1">{{ name }}</h2>
-        <p class="text-body-secondary mb-0">{{ description }}</p>
-      </div>
-    </a>
-  </div>
-  {% endfor %}
+
+<div class="container-fluid">
+
+    <!-- Welcome Section -->
+    <div class="card border-0 shadow-sm mb-4"
+         style="background: linear-gradient(120deg, #172554, #1e40af); color: white;">
+        <div class="card-body p-4 p-lg-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <p class="text-uppercase small fw-semibold mb-2"
+                       style="letter-spacing: 1.5px; color: #bfdbfe;">
+                        IT Project Team 47
+                    </p>
+
+                    <h1 class="h2 fw-bold mb-2">
+                        WIL Placement Management System
+                    </h1>
+
+                    <p class="mb-0" style="color: #dbeafe;">
+                        Manage workplace placements, monitor student progress
+                        and coordinate work-integrated learning activities
+                        through one central platform.
+                    </p>
+                </div>
+
+                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                    <a href="{% url 'placements:placement_create' %}"
+                       class="btn btn-light fw-semibold me-2 mb-2">
+                        Create Placement
+                    </a>
+
+                    <a href="{% url 'placements:placement_list' %}"
+                       class="btn btn-outline-light mb-2">
+                        View Placements
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Statistics -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="h5 fw-bold mb-1">System Overview</h2>
+            <p class="text-body-secondary small mb-0">
+                A summary of placement management activities.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary small mb-2">
+                        Total Students
+                    </p>
+                    <h3 class="fw-bold mb-1">—</h3>
+                    <span class="text-body-secondary small">
+                        Registered student accounts
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary small mb-2">
+                        Active Placements
+                    </p>
+                    <h3 class="fw-bold mb-1">—</h3>
+                    <span class="text-body-secondary small">
+                        Currently active placements
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary small mb-2">
+                        Pending Approvals
+                    </p>
+                    <h3 class="fw-bold mb-1">—</h3>
+                    <span class="text-body-secondary small">
+                        Awaiting coordinator review
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary small mb-2">
+                        Host Organisations
+                    </p>
+                    <h3 class="fw-bold mb-1">—</h3>
+                    <span class="text-body-secondary small">
+                        Registered workplace partners
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <h2 class="h5 fw-bold mb-1">Quick Actions</h2>
+            <p class="text-body-secondary small mb-3">
+                Access frequently used system functions.
+            </p>
+
+            <div class="row g-3">
+
+                <div class="col-md-6 col-xl-3">
+                    <a href="{% url 'placements:placement_create' %}"
+                       class="btn btn-outline-primary w-100 py-3">
+                        Create New Placement
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-xl-3">
+                    <a href="{% url 'placements:placement_list' %}"
+                       class="btn btn-outline-primary w-100 py-3">
+                        Manage Placements
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-xl-3">
+                    <a href="{% url 'reports:index' %}"
+                       class="btn btn-outline-primary w-100 py-3">
+                        View Reports
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-xl-3">
+                    <a href="{% url 'core:audit_log' %}"
+                       class="btn btn-outline-primary w-100 py-3">
+                        Review Audit Log
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- System Modules -->
+    <div class="mb-4">
+
+        <div class="mb-3">
+            <h2 class="h5 fw-bold mb-1">System Modules</h2>
+            <p class="text-body-secondary small mb-0">
+                Navigate through the main components of the WIL system.
+            </p>
+        </div>
+
+        <div class="row g-3">
+
+            {% for url_name, name, description in modules %}
+
+            <div class="col-md-6 col-xl-4">
+                <a href="{% url url_name %}"
+                   class="card border-0 shadow-sm h-100 text-decoration-none text-reset">
+
+                    <div class="card-body p-4">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h6 fw-bold mb-0">{{ name }}</h3>
+                            <span class="badge bg-light text-primary">
+                                Open Module
+                            </span>
+                        </div>
+
+                        <p class="text-body-secondary small mb-0">
+                            {{ description }}
+                        </p>
+
+                    </div>
+                </a>
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+                <div class="alert alert-secondary mb-0">
+                    No system modules are currently available.
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- Recent Activities -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h2 class="h5 fw-bold mb-1">Recent System Activities</h2>
+                    <p class="text-body-secondary small mb-0">
+                        Latest recorded actions across the system.
+                    </p>
+                </div>
+
+                <a href="{% url 'core:audit_log' %}"
+                   class="btn btn-sm btn-outline-secondary">
+                    View Audit Log
+                </a>
+            </div>
+
+            <div class="text-center py-4">
+                <h3 class="h6 text-body-secondary">
+                    No recent activities to display
+                </h3>
+
+                <p class="text-body-secondary small mb-0">
+                    System activities will appear here once audit logging
+                    and database integration are implemented.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer Information -->
+    <div class="text-center py-3">
+        <p class="text-body-secondary small mb-1">
+            WIL Placement Management System
+        </p>
+        <p class="text-body-secondary small mb-0">
+            Richfield Graduate Institute of Technology · IT Project Team 47
+        </p>
+    </div>
+
 </div>
+
 {% endblock %}
+
