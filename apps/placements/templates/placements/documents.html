@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Documents · WIL Placement System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <div class="mb-4">
+        <h1 class="h3">Document Management</h1>
+        <p class="text-body-secondary">
+            Upload and manage your placement documents.
+        </p>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h2 class="h5 mb-3">Upload a Document</h2>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-primary">
+                    Upload Document
+                </button>
+
+                <a href="{% url 'placements:index' %}"
+                   class="btn btn-outline-secondary ms-2">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="h5 mb-3">Previously Uploaded Documents</h2>
+
+            {% if documents %}
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>Document Name</th>
+                                <th>Document Type</th>
+                                <th>Date Uploaded</th>
+                                <th>File</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for document in documents %}
+                            <tr>
+                                <td>{{ document.document_name }}</td>
+                                <td>{{ document.get_document_type_display }}</td>
+                                <td>{{ document.uploaded_at|date:"d M Y" }}</td>
+                                <td>
+                                    {% if document.file %}
+                                        <a href="{{ document.file.url }}" target="_blank">
+                                            View Document
+                                        </a>
+                                    {% else %}
+                                        Not available
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info mb-0">
+                    No documents have been uploaded yet.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

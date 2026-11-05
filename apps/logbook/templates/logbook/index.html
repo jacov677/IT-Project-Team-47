@@ -1,7 +1,127 @@
 {% extends "base.html" %}
+
 {% block title %}Logbook · WIL Placement System{% endblock %}
+
 {% block content %}
-<h1 class="h3">Logbook</h1>
-<p class="text-body-secondary">Student logbook entries and mentor sign-off.</p>
-<div class="alert alert-info">This module has not been built yet.</div>
+<div class="container mt-4">
+
+    {% if placement %}
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3">Logbook</h1>
+                <p class="text-body-secondary">
+                    {{ placement.student_name }} · {{ placement.company_name }}
+                </p>
+            </div>
+
+            <a href="{% url 'logbook:add_entry' placement.pk %}"
+               class="btn btn-primary">
+                Add Entry
+            </a>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Logbook Entries</h2>
+
+                {% if entries %}
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Activities</th>
+                                    <th>Hours Worked</th>
+                                    <th>Supervisor Comments</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for entry in entries %}
+                                <tr>
+                                    <td>{{ entry.entry_date }}</td>
+                                    <td>{{ entry.activities }}</td>
+                                    <td>{{ entry.hours_worked }}</td>
+                                    <td>
+                                        {{ entry.supervisor_comments|default:"Pending" }}
+                                        <th>Actions</th>
+                                   </td>
+<td>
+    <form method="POST"
+          action="{% url 'logbook:delete_entry' placement.pk entry.pk %}"
+          onsubmit="return confirm('Are you sure you want to delete this entry?');">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-outline-danger">
+            Delete
+        </button>
+    </form>
+</td>
+</tr>
+{% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info mb-0">
+                        No logbook entries have been recorded yet.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="mb-4">
+            <h1 class="h3">Logbook</h1>
+            <p class="text-body-secondary">
+                Select a placement to view its logbook.
+            </p>
+        </div>
+
+        {% if placements %}
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="h5">Available Placements</h2>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Company</th>
+                                    <th>Position</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for placement in placements %}
+                                <tr>
+                                    <td>{{ placement.student_name }}</td>
+                                    <td>{{ placement.company_name }}</td>
+                                    <td>{{ placement.position }}</td>
+                                    <td>
+                                        <a href="{% url 'logbook:placement_entries' placement.pk %}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            Open Logbook
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No placements are available yet.
+            </div>
+        {% endif %}
+
+    {% endif %}
+
+</div>
 {% endblock %}

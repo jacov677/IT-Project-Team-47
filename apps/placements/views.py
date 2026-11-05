@@ -1,6 +1,64 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Placement, Document
+from .forms import PlacementForm, DocumentForm
 
 
+# Main placements page
 def index(request):
-    """Start page of the Placements module. Replace with the real pages."""
-    return render(request, "placements/index.html")
+    placements = Placement.objects.all().order_by("-created_at")
+
+    return render(request, "placements/index.html", {
+        "placements": placements
+    })
+
+
+# Add a new placement
+def add_placement(request):
+    form = PlacementForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            print("PLACEMENT SAVED SUCCESSFULLY")
+            return redirect("placements:index")
+        else:
+            print("PLACEMENT FORM ERRORS:", form.errors)
+
+    return render(request, "placements/placement_form.html", {
+        "form": form
+    })
+
+
+# View placement details
+def placement_detail(request, pk):
+    placement = get_object_or_404(Placement, pk=pk)
+    documents = Document.objects.filter(placement=placement)
+
+    return render(request, "placements/placement_detail.html", {
+        "placement": placement,
+        "documents": documents
+    })
+
+
+# Upload and view documents for a placement
+def add_document(request, pk):
+    placement = get_object_or_404(Placement, pk=pk)
+    documents = Document.objects.filter(placement=placement).order_by("-uploaded_at")
+
+    form = DocumentForm(
+        request.POST or None,
+        request.FILES or None
+    )
+
+    if request.method == "POST" and form.is_valid():
+        document = form.save(commit=False)
+        document.placement = placement
+        document.save()
+
+        return redirect("placements:add_document", pk=pk)
+
+    return render(request, "placements/documents.html", {
+        "form": form,
+        "placement": placement,
+        "documents": documents
+    })

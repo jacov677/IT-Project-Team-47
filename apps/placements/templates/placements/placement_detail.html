@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Placement Details · WIL Placement System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3">Placement Details</h1>
+        <a href="{% url 'placements:index' %}" class="btn btn-outline-secondary">
+            Back to Placements
+        </a>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h2 class="h5">{{ placement.student_name }}</h2>
+            <p><strong>Company:</strong> {{ placement.company_name }}</p>
+            <p><strong>Position:</strong> {{ placement.position }}</p>
+            <p><strong>Start date:</strong> {{ placement.start_date }}</p>
+            <p><strong>End date:</strong> {{ placement.end_date }}</p>
+            <p><strong>Status:</strong> {{ placement.status }}</p>
+
+            <a href="{% url 'placements:add_document' placement.pk %}"
+               class="btn btn-primary">
+                Upload Document
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="h5">Placement Documents</h2>
+
+            {% if documents %}
+                <ul class="list-group list-group-flush">
+                    {% for document in documents %}
+                        <li class="list-group-item">
+                            {{ document.document_name }}
+                            ({{ document.get_document_type_display }})
+
+                            {% if document.file %}
+                                <a href="{{ document.file.url }}" target="_blank">
+                                    Open file
+                                </a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-body-secondary">No documents uploaded yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

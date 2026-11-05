@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Add Placement · WIL Placement System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="h3 mb-3">Add Placement</h1>
+    <p class="text-body-secondary">Enter the workplace placement details.</p>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-primary">
+                    Save Placement
+                </button>
+
+                <a href="{% url 'placements:index' %}" class="btn btn-outline-secondary ms-2">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
