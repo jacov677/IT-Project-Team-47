@@ -1,5 +1,6 @@
+"""Assessments module."""
 from django.db import models
-from apps.accounts.models import Student, Mentor
+from apps.accounts.models import Student, Coordinator, Mentor
 from apps.placements.models import Placement
 
 class Assessment(models.Model):
@@ -8,6 +9,26 @@ class Assessment(models.Model):
         SUBMITTED = "SUBMITTED", "Submitted"
         APPROVED = "APPROVED", "Approved"
         REJECTED = "REJECTED", "Rejected"
+
+    class Evaluation(models.Model):
+        placement = models.ForeignKey(Placement, on_delete=models.RESTRICT)
+        mentor = models.ForeignKey(Mentor, on_delete=models.RESTRICT)
+        score = models.IntegerField()
+        feedback = models.TextField()
+        evaluation_date = models.DateField()
+
+        def __str__(self):
+            return f"Evaluation for {self.placement} by {self.mentor}"
+
+    class AssessmentResult(models.Model):
+        placement = models.OneToOneField(Placement, on_delete=models.RESTRICT)
+        coordinator = models.ForeignKey(Coordinator, on_delete=models.RESTRICT)
+        final_mark = models.IntegerField()
+        outcome = models.CharField(max_length=20)
+        assessed_at = models.DateTimeField(auto_now_add=True)
+
+        def __str__(self):
+            return f"Result for {self.placement} - {self.outcome}"
 
     placement = models.ForeignKey(Placement, on_delete=models.RESTRICT, related_name="assessments")
     student = models.ForeignKey(Student, on_delete=models.RESTRICT, related_name="assessments")
