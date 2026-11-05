@@ -1,7 +1,9 @@
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from .models import User, Student, Coordinator, Mentor
+from .forms import EmailLoginForm
+from .models import Coordinator, Mentor, Student, User
 
 
 @login_required
@@ -15,3 +17,8 @@ def index(request):
 
     return render(request, "accounts/index.html", context)
 
+
+class LoginView(auth_views.LoginView):
+    template_name = "accounts/login.html"
+    authentication_form = EmailLoginForm
+    redirect_authenticated_user = True

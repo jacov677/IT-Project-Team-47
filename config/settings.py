@@ -101,3 +101,12 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# Login and logout (apps/accounts)
+AUTHENTICATION_BACKENDS = [
+    "apps.accounts.backends.EmailBackend",  # log in with email
+    "django.contrib.auth.backends.ModelBackend",  # username still works, e.g. on /admin
+]
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "core:home"
+LOGOUT_REDIRECT_URL = "accounts:login"
