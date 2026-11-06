@@ -80,3 +80,49 @@ class LoginTests(TestCase):
         )
         response = self.client.post(reverse("accounts:logout"))
         self.assertRedirects(response, reverse("accounts:login"))
+
+
+class RegistrationTests(TestCase):
+    data = {
+        "email": "New.Student@Test.com",
+        "first_name": "Lerato",
+        "last_name": "Nkosi",
+        "student_number": "402400001",
+        "qualification": "BSc IT",
+        "contact_number": "",
+        "password1": "Strong-pass-2026!",
+        "password2": "Strong-pass-2026!",
+    }
+
+    def test_register_page_loads(self):
+        self.assertEqual(self.client.get(reverse("accounts:register")).status_code, 200)
+
+    def test_registration_creates_inactive_student(self):
+        response = self.client.post(reverse("accounts:register"), self.data)
+        self.assertRedirects(response, reverse("accounts:login"))
+        user = User.objects.get(email="new.student@test.com")
+        self.assertFalse(user.is_active)
+        self.assertEqual(user.role, User.Role.STUDENT)
+        self.assertEqual(user.student_profile.student_number, "402400001")
+
+    def test_duplicate_email_is_rejected(self):
+        self.client.post(reverse("accounts:register"), self.data)
+        response = self.client.post(reverse("accounts:register"), {**self.data, "student_number": "999"})
+        self.assertContains(response, "already exists")
+
+    def test_waiting_account_gets_clear_message(self):
+        self.client.post(reverse("accounts:register"), self.data)
+        response = self.client.post(
+            reverse("accounts:login"),
+            {"username": "new.student@test.com", "password": "Strong-pass-2026!"},
+        )
+        self.assertContains(response, "waiting for approval")
+
+    def test_can_log_in_after_admin_activates(self):
+        self.client.post(reverse("accounts:register"), self.data)
+        User.objects.filter(email="new.student@test.com").update(is_active=True)
+        response = self.client.post(
+            reverse("accounts:login"),
+            {"username": "new.student@test.com", "password": "Strong-pass-2026!"},
+        )
+        self.assertRedirects(response, reverse("core:home"))

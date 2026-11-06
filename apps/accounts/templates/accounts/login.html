@@ -24,6 +24,9 @@
           <input type="hidden" name="next" value="{{ next }}">
           <button class="btn btn-primary w-100" type="submit">Log in</button>
         </form>
+        <p class="text-center mt-3 mb-0 small">
+          New student? <a href="{% url 'accounts:register' %}">Create an account</a>
+        </p>
       </div>
     </div>
   </div>
