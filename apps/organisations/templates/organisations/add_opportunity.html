@@ -1,16 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Post Opportunity</title>
-</head>
-<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9;">
-    <h1 style="color: #0056b3;">Post Placement Opportunity</h1>
-    <form method="post" style="background: white; padding: 20px; border-radius: 5px; width: 400px;">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" style="background: #0056b3; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer;">Save Opportunity</button>
-    </form>
-    <br>
-    <a href="{% url 'org_dashboard' %}" style="color: #0056b3;">Back to Dashboard</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 600px;">
+    <h1 class="text-primary mb-3">Post Placement Opportunity</h1>
+
+    <div class="card shadow-sm p-4">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary w-100 mt-3">Save Opportunity</button>
+        </form>
+    </div>
+
+    <div class="mt-3">
+        <a href="{% url 'org_dashboard' %}" class="text-decoration-none">&larr; Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

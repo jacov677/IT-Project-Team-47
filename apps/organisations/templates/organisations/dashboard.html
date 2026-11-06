@@ -1,32 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Employer Portal</title>
-</head>
-<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9;">
-    <h1 style="color: #0056b3;">Employer / Organisation Portal</h1>
-    <a href="{% url 'add_opportunity' %}" style="background: #0056b3; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px;">+ Post New Opportunity</a>
+{% extends 'base.html' %}
 
-    <h3>Active Placement Opportunities</h3>
-    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; background: white; border-collapse: collapse;">
-        <tr style="background: #0056b3; color: white;">
-            <th>Company</th>
-            <th>Title</th>
-            <th>Slots</th>
-            <th>Closing Date</th>
-        </tr>
-        {% for opp in opportunities %}
-        <tr>
-            <td>{{ opp.organisation.company_name }}</td>
-            <td>{{ opp.title }}</td>
-            <td>{{ opp.slots_available }}</td>
-            <td>{{ opp.closing_date }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">No placement opportunities found.</td>
-        </tr>
-        {% endfor %}
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="text-primary">Employer Portal</h1>
+            {% if organization %}
+                <p class="text-muted mb-0">Logged in as: <strong>{{ organization.company_name }}</strong></p>
+            {% else %}
+                <p class="text-warning mb-0">Warning: No Host Organization profile linked to your user account.</p>
+            {% endif %}
+        </div>
+        {% if organization %}
+            <a href="{% url 'add_opportunity' %}" class="btn btn-primary">+ Post New Opportunity</a>
+        {% endif %}
+    </div>
+
+    <h3>Your Placement Opportunities</h3>
+    <table class="table table-bordered table-striped bg-white shadow-sm">
+        <thead class="table-primary">
+            <tr>
+                <th>Title</th>
+                <th>Slots Available</th>
+                <th>Closing Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for opp in opportunities %}
+            <tr>
+                <td>{{ opp.title }}</td>
+                <td>{{ opp.slots_available }}</td>
+                <td>{{ opp.closing_date }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center text-muted">No placement opportunities posted yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-</body>
-</html>
+</div>
+{% endblock %}
