@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employer Portal</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9;">
+    <h1 style="color: #0056b3;">Employer / Organisation Portal</h1>
+    <a href="{% url 'add_opportunity' %}" style="background: #0056b3; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px;">+ Post New Opportunity</a>
+
+    <h3>Active Placement Opportunities</h3>
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; background: white; border-collapse: collapse;">
+        <tr style="background: #0056b3; color: white;">
+            <th>Company</th>
+            <th>Title</th>
+            <th>Slots</th>
+            <th>Closing Date</th>
+        </tr>
+        {% for opp in opportunities %}
+        <tr>
+            <td>{{ opp.organisation.company_name }}</td>
+            <td>{{ opp.title }}</td>
+            <td>{{ opp.slots_available }}</td>
+            <td>{{ opp.closing_date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No placement opportunities found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

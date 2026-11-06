@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post Opportunity</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9;">
+    <h1 style="color: #0056b3;">Post Placement Opportunity</h1>
+    <form method="post" style="background: white; padding: 20px; border-radius: 5px; width: 400px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background: #0056b3; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer;">Save Opportunity</button>
+    </form>
+    <br>
+    <a href="{% url 'org_dashboard' %}" style="color: #0056b3;">Back to Dashboard</a>
+</body>
+</html>
