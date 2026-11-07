@@ -55,7 +55,7 @@ class LoginTests(TestCase):
             reverse("accounts:login"),
             {"username": "Student2@Test.com", "password": "TestPassword123!"},
         )
-        self.assertRedirects(response, reverse("core:home"))
+        self.assertRedirects(response, reverse("accounts:dashboard"), fetch_redirect_response=False)
 
     def test_wrong_password_is_rejected(self):
         response = self.client.post(
@@ -130,7 +130,7 @@ class RegistrationTests(TestCase):
             reverse("accounts:login"),
             {"username": "new.student@test.com", "password": "Strong-pass-2026!"},
         )
-        self.assertRedirects(response, reverse("core:home"))
+        self.assertRedirects(response, reverse("accounts:dashboard"), fetch_redirect_response=False)
 
 
 
@@ -173,3 +173,34 @@ class RoleRequiredTests(TestCase):
     def test_superuser_always_allowed(self):
         user = self.make_user("su@test.com", User.Role.STUDENT, is_superuser=True)
         self.assertEqual(self.view(self.make_request(user)).status_code, 200)
+
+
+class DashboardRedirectTests(TestCase):
+    def login_as(self, role, **extra):
+        email = f"{role.lower()}@test.com"
+        User.objects.create_user(username=email, email=email, password="Pass12345!", role=role, **extra)
+        self.client.login(email=email, password="Pass12345!")
+
+    def test_anonymous_is_sent_to_login(self):
+        response = self.client.get(reverse("accounts:dashboard"))
+        self.assertRedirects(response, "/accounts/login/?next=/accounts/dashboard/", fetch_redirect_response=False)
+
+    def test_student_goes_to_placements(self):
+        self.login_as(User.Role.STUDENT)
+        response = self.client.get(reverse("accounts:dashboard"))
+        self.assertRedirects(response, reverse("placements:index"), fetch_redirect_response=False)
+
+    def test_mentor_goes_to_logbook(self):
+        self.login_as(User.Role.MENTOR)
+        response = self.client.get(reverse("accounts:dashboard"))
+        self.assertRedirects(response, reverse("logbook:index"), fetch_redirect_response=False)
+
+    def test_superuser_goes_to_admin(self):
+        self.login_as(User.Role.STUDENT, is_superuser=True, is_staff=True)
+        response = self.client.get(reverse("accounts:dashboard"))
+        self.assertRedirects(response, reverse("admin:index"), fetch_redirect_response=False)
+
+    def test_login_lands_on_dashboard(self):
+        User.objects.create_user(username="c@test.com", email="c@test.com", password="Pass12345!", role=User.Role.COORDINATOR)
+        response = self.client.post(reverse("accounts:login"), {"username": "c@test.com", "password": "Pass12345!"})
+        self.assertRedirects(response, reverse("accounts:dashboard"), fetch_redirect_response=False)

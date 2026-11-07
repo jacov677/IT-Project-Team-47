@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
@@ -20,7 +20,6 @@ def index(request):
 
     return render(request, "accounts/index.html", context)
 
-
 class LoginView(auth_views.LoginView):
     template_name = "accounts/login.html"
     authentication_form = EmailLoginForm
@@ -38,3 +37,21 @@ class RegisterView(FormView):
             "Registration successful. After a administrator admids and verifies your account,you will able to log in.",
         )
         return super().form_valid(form)
+
+
+# Where each role lands after logging in.
+ROLE_HOME = {
+    User.Role.STUDENT: "placements:index",
+    User.Role.COORDINATOR: "placements:index",
+    User.Role.MENTOR: "logbook:index",
+    User.Role.EMPLOYER: "organisations:index",
+    User.Role.ADMIN: "admin:index",
+}
+
+
+@login_required
+def dashboard(request):
+    """Send the logged-in user to the start page for their role."""
+    if request.user.is_superuser:
+        return redirect("admin:index")
+    return redirect(ROLE_HOME.get(request.user.role, "core:home"))
