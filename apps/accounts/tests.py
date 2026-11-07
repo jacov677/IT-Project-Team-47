@@ -1,6 +1,11 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse
+from django.test import RequestFactory
+from django.contrib.auth.models import AnonymousUser
+from .decorators import role_required
 
 from .models import Student, Coordinator, Mentor
 
@@ -126,3 +131,45 @@ class RegistrationTests(TestCase):
             {"username": "new.student@test.com", "password": "Strong-pass-2026!"},
         )
         self.assertRedirects(response, reverse("core:home"))
+
+
+
+class RoleRequiredTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+        @role_required(User.Role.COORDINATOR, User.Role.ADMIN)
+        def protected(request):
+            return HttpResponse("ok")
+
+        self.view = protected
+
+    def make_request(self, user):
+        request = self.factory.get("/protected/")
+        request.user = user
+        return request
+
+    def make_user(self, email, role, **extra):
+        return User.objects.create_user(username=email, email=email, password="Pass12345!", role=role, **extra)
+
+    def test_anonymous_is_sent_to_login(self):
+        response = self.view(self.make_request(AnonymousUser()))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/accounts/login/", response.url)
+
+    def test_student_is_forbidden(self):
+        user = self.make_user("s@test.com", User.Role.STUDENT)
+        with self.assertRaises(PermissionDenied):
+            self.view(self.make_request(user))
+
+    def test_coordinator_allowed(self):
+        user = self.make_user("c@test.com", User.Role.COORDINATOR)
+        self.assertEqual(self.view(self.make_request(user)).status_code, 200)
+
+    def test_admin_allowed(self):
+        user = self.make_user("a@test.com", User.Role.ADMIN)
+        self.assertEqual(self.view(self.make_request(user)).status_code, 200)
+
+    def test_superuser_always_allowed(self):
+        user = self.make_user("su@test.com", User.Role.STUDENT, is_superuser=True)
+        self.assertEqual(self.view(self.make_request(user)).status_code, 200)
