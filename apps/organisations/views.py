@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from .models import PlacementOpportunity, HostOrganization
 from .forms import PlacementOpportunityForm
 
-
 @login_required
 def org_dashboard(request):
     # Get the organization linked to the currently logged-in user (Organisation-specific permission)
@@ -31,7 +30,7 @@ def add_opportunity(request):
             opportunity = form.save(commit=False)
             opportunity.organisation = organization  # Automatically bind to logged-in employer
             opportunity.save()
-            return redirect('org_dashboard')
+            return redirect('organisations:org_dashboard')
     else:
         form = PlacementOpportunityForm()
 
