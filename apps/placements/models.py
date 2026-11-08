@@ -1,3 +1,4 @@
+"""Placements module"""
 from django.db import models
 from apps.accounts.models import Student, Coordinator, Mentor
 from apps.organisations.models import HostOrganization

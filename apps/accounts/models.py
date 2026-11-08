@@ -106,9 +106,9 @@ class Mentor(models.Model):
 
 class EmployerProfile(models.Model):
     """
-    Gives an organisation representative their own login account.
+    Gives an organization representative their own login account.
 
-    An organisation can have multiple employer representatives.
+    An organization can have multiple employer representatives.
     Each representative has one user account.
     """
 
@@ -138,3 +138,18 @@ class EmployerProfile(models.Model):
             f"{self.first_name} {self.last_name} - "
             f"{self.organisation}"
         )
+
+class AuditLog(models.Model):
+    user = models.ForeignKey('accounts.User', on_delete=models.SET_NULL, null=True, blank=True)
+    action = models.CharField(max_length=50) # e.g. CREATE, UPDATE, DELETE, LOGIN
+    table_name = models.CharField(max_length=50) # e.g. Placement, LogbookEntry
+    record_id = models.IntegerField(null=True, blank=True)
+    details = models.TextField(blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "audit_log"
+        ordering = ["-timestamp"]
+
+    def __str__(self):
+        return f"{self.user} - {self.action} on {self.table_name} #{self.record_id}"
