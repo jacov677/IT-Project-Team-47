@@ -1,7 +1,144 @@
+
 {% extends "base.html" %}
-{% block title %}Reports · WIL Placement System{% endblock %}
+
+{% block title %}Coordinator Reports · WIL Placement System{% endblock %}
+
 {% block content %}
-<h1 class="h3">Reports</h1>
-<p class="text-body-secondary">Coordinator reports and the audit log.</p>
-<div class="alert alert-info">This module has not been built yet.</div>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h1 class="h3">Coordinator Reports</h1>
+        <p class="text-body-secondary">
+            Generate and review reports relating to student workplace placements.
+        </p>
+    </div>
+
+    <!-- Report Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Total Placements</h6>
+                    <h2 class="mb-0">—</h2>
+                    <small class="text-body-secondary">Awaiting database integration</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Completed Placements</h6>
+                    <h2 class="mb-0">—</h2>
+                    <small class="text-body-secondary">Awaiting database integration</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6 class="text-body-secondary">Registered Students</h6>
+                    <h2 class="mb-0">—</h2>
+                    <small class="text-body-secondary">Awaiting database integration</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Available Reports -->
+    <h5 class="mb-3">Available Reports</h5>
+
+    <div class="row g-3 mb-4">
+
+        <!-- Placement Summary -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Placement Summary</h5>
+                    <p class="card-text text-body-secondary">
+                        View an overview of student placements, organisations,
+                        mentors and placement statuses.
+                    </p>
+                    <a href="{% url 'reports:placement_summary' %}"
+                       class="btn btn-outline-primary">
+                        View Report
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Reports -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Student Reports</h5>
+                    <p class="card-text text-body-secondary">
+                        Review student placement information and assigned
+                        workplace details.
+                    </p>
+                    <a href="{% url 'reports:student_reports' %}"
+                       class="btn btn-outline-primary">
+                        View Report
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organisation Reports -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Organisation Reports</h5>
+                    <p class="card-text text-body-secondary">
+                        Review host organisations and their associated
+                        student placements.
+                    </p>
+                    <a href="{% url 'reports:organisation_reports' %}"
+                       class="btn btn-outline-primary">
+                        View Report
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completion Reports -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Placement Completion</h5>
+                    <p class="card-text text-body-secondary">
+                        Review completed placements and outstanding
+                        placement requirements.
+                    </p>
+                    <a href="{% url 'reports:completion_reports' %}"
+                       class="btn btn-outline-primary">
+                        View Report
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Information -->
+    <div class="alert alert-info">
+        <strong>Development Notice:</strong>
+        Report figures and filtering functionality will become available
+        after integration with the shared database models.
+    </div>
+
+    <!-- Navigation -->
+    <a href="{% url 'placements:index' %}"
+       class="btn btn-secondary">
+        Back to Coordinator Dashboard
+    </a>
+
+</div>
+
 {% endblock %}
+

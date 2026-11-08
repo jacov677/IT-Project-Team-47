@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment Details · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+            <h1 class="h3">Assessment Details</h1>
+            <p class="text-body-secondary mb-0">
+                Review student placement assessment information and evaluation progress.
+            </p>
+        </div>
+
+        <a href="{% url 'assessments:assessment_list' %}"
+           class="btn btn-outline-secondary">
+            Back to Assessments
+        </a>
+    </div>
+
+    <!-- Student Information -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <h5 class="fw-semibold mb-3">Student Information</h5>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Student Number</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Student Name</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Qualification</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Placement Information -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <h5 class="fw-semibold mb-3">Placement Information</h5>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Host Organisation</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Assigned Mentor</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Placement Status</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Placement Start Date</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Placement End Date</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Evaluation Progress -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <h5 class="fw-semibold mb-3">Assessment Requirements</h5>
+
+            <div class="table-responsive">
+                <table class="table align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Requirement</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td class="fw-medium">Logbook Entries</td>
+                            <td>Required placement hours and mentor sign-offs.</td>
+                            <td>
+                                <span class="badge bg-secondary">Not available</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="fw-medium">Mentor Evaluation</td>
+                            <td>Mentor assessment and submitted feedback.</td>
+                            <td>
+                                <span class="badge bg-secondary">Not available</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="fw-medium">Final Assessment Result</td>
+                            <td>Coordinator captures the student's final mark.</td>
+                            <td>
+                                <span class="badge bg-secondary">Not available</span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Final Result -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <h5 class="fw-semibold mb-3">Final Assessment Result</h5>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Final Mark</small>
+                    <h3 class="fw-bold mb-0">—</h3>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Captured By</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-body-secondary">Date Captured</small>
+                    <p class="fw-semibold mb-0">Not available</p>
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+                <a href="{% url 'assessments:result_capture' %}"
+                   class="btn btn-primary">
+                    Capture Final Result
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Development Notice -->
+    <div class="alert alert-info border-0 mb-0">
+        <strong>Development Notice:</strong>
+        Student information, placement details, evaluation progress
+        and final results will be populated through database integration.
+    </div>
+
+</div>
+
+{% endblock %}

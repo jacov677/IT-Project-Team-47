@@ -1,35 +1,420 @@
-{% load static %}<!doctype html>
+
+{% load static %}
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}WIL Placement System{% endblock %}</title>
-  <link href="{% static 'vendor/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'css/app.css' %}" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}WIL Placement System{% endblock %}</title>
+
+    <link href="{% static 'vendor/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/app.css' %}" rel="stylesheet">
+
+    <style>
+        :root {
+            --wil-navy: #173d68;
+            --wil-blue: #24558b;
+            --wil-sidebar: #f1f5fa;
+            --wil-background: #f5f7fa;
+            --wil-border: #e1e7ef;
+        }
+
+        body {
+            background-color: var(--wil-background);
+            color: #243247;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Top Header */
+        .wil-header {
+            background-color: var(--wil-navy);
+            min-height: 68px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .wil-brand {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .wil-brand:hover {
+            color: #e3edfa;
+        }
+
+        .wil-header-user {
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .wil-user-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            color: var(--wil-navy);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Mobile Navigation Button */
+        .wil-menu-button {
+            font-size: 1.2rem;
+            padding: 5px 11px;
+        }
+
+        /* Main Layout */
+        .wil-layout {
+            display: flex;
+            min-height: calc(100vh - 68px);
+        }
+
+        /* Sidebar */
+        .wil-sidebar {
+            width: 250px;
+            min-width: 250px;
+            background-color: var(--wil-sidebar);
+            border-right: 1px solid var(--wil-border);
+            padding: 24px 15px;
+        }
+
+        .wil-sidebar-heading {
+            color: #8391a4;
+            font-size: 0.70rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 0 12px;
+            margin: 8px 0 12px;
+            text-transform: uppercase;
+        }
+
+        .wil-sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #42546c;
+            padding: 11px 13px;
+            border-radius: 7px;
+            margin-bottom: 5px;
+            font-size: 0.94rem;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+
+        .wil-sidebar .nav-link:hover {
+            background-color: #e1eaf5;
+            color: var(--wil-navy);
+        }
+
+        .wil-sidebar .nav-link.active {
+            background-color: #dce9f8;
+            color: var(--wil-navy);
+            font-weight: 700;
+            border-left: 3px solid var(--wil-blue);
+        }
+
+        .wil-sidebar .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+        }
+
+        .wil-sidebar-divider {
+            border-top: 1px solid var(--wil-border);
+            margin: 18px 5px;
+        }
+
+        /* Main Content */
+        .wil-main {
+            flex: 1;
+            min-width: 0;
+            padding: 30px;
+        }
+
+        .wil-content {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        /* General Dashboard Styling */
+        .card {
+            border-color: var(--wil-border);
+            border-radius: 9px;
+        }
+
+        .card-header {
+            background-color: #ffffff;
+        }
+
+        .wil-page-footer {
+            border-top: 1px solid var(--wil-border);
+            color: #8995a5;
+            font-size: 0.8rem;
+            padding-top: 15px;
+            margin-top: 35px;
+        }
+
+        /* Mobile Layout */
+        @media (max-width: 991.98px) {
+            .wil-layout {
+                display: block;
+            }
+
+            .wil-sidebar {
+                width: 100%;
+                min-width: 100%;
+                padding: 15px;
+                border-right: none;
+                border-bottom: 1px solid var(--wil-border);
+            }
+
+            .wil-main {
+                padding: 20px 15px;
+            }
+
+            .wil-header {
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .wil-brand {
+                font-size: 1rem;
+            }
+
+            .wil-header-user {
+                font-size: 0.8rem;
+            }
+
+            .wil-main {
+                padding: 16px 10px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-body-tertiary">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-    <div class="container">
-      <a class="navbar-brand fw-semibold" href="{% url 'core:home' %}">WIL Placement System</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:index' %}">Accounts</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'organisations:org_dashboard' %}">Organisations</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'placements:index' %}">Placements</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'logbook:index' %}">Logbook</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'assessments:index' %}">Assessments</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'reports:index' %}">Reports</a></li>
-        </ul>
-      </div>
+
+<body>
+
+    <!-- Top Header -->
+    <header class="wil-header">
+        <div class="container-fluid px-3 px-lg-4">
+
+            <div class="d-flex align-items-center justify-content-between py-2">
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="btn btn-outline-light d-lg-none wil-menu-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#wilSidebar"
+                            aria-controls="wilSidebar"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        &#9776;
+                    </button>
+
+                    <a class="wil-brand" href="{% url 'core:home' %}">
+                        WIL Placement System
+                    </a>
+
+                </div>
+
+                <!-- User Information and Logout -->
+                <div class="d-flex align-items-center gap-3">
+
+                    {% if user.is_authenticated %}
+
+                        <span class="wil-header-user d-none d-sm-inline">
+                            {{ user.get_full_name|default:user.username }}
+                        </span>
+
+                        <span class="wil-user-icon">
+                            {{ user.username|first|upper }}
+                        </span>
+
+                        <form method="post" action="{% url 'accounts:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light btn-sm">
+                                Logout
+                            </button>
+                        </form>
+
+                    {% else %}
+
+                        <span class="wil-header-user">
+                            WIL Portal
+                        </span>
+
+                        <span class="wil-user-icon">
+                            W
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Application Layout -->
+    <div class="wil-layout">
+
+        <!-- Left Sidebar -->
+        <aside class="wil-sidebar collapse d-lg-block" id="wilSidebar">
+
+            <!-- Main Navigation -->
+            <div class="wil-sidebar-heading">
+                Main Navigation
+            </div>
+
+            <nav class="nav flex-column">
+
+                <a class="nav-link {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}active{% endif %}"
+                   href="{% url 'core:home' %}">
+                    <span class="nav-icon">&#8962;</span>
+                    Dashboard
+                </a>
+
+                <a class="nav-link {% if request.resolver_match.app_name == 'accounts' %}active{% endif %}"
+                   href="{% url 'accounts:index' %}">
+                    <span class="nav-icon">&#9823;</span>
+                    Accounts
+                </a>
+
+                <a class="nav-link {% if request.resolver_match.app_name == 'organisations' %}active{% endif %}"
+                   href="{% url 'organisations:index' %}">
+                    <span class="nav-icon">&#9638;</span>
+                    Organisations
+                </a>
+
+                <a class="nav-link {% if request.resolver_match.app_name == 'placements' %}active{% endif %}"
+                   href="{% url 'placements:index' %}">
+                    <span class="nav-icon">&#9635;</span>
+                    Placements
+                </a>
+
+                <a class="nav-link {% if request.resolver_match.app_name == 'logbook' %}active{% endif %}"
+                   href="{% url 'logbook:index' %}">
+                    <span class="nav-icon">&#9636;</span>
+                    Logbook
+                </a>
+
+                <a class="nav-link {% if request.resolver_match.app_name == 'assessments' %}active{% endif %}"
+                   href="{% url 'assessments:index' %}">
+                    <span class="nav-icon">&#10003;</span>
+                    Assessments
+                </a>
+
+                <a class="nav-link {% if request.resolver_match.app_name == 'reports' %}active{% endif %}"
+                   href="{% url 'reports:index' %}">
+                    <span class="nav-icon">&#9637;</span>
+                    Reports
+                </a>
+
+            </nav>
+
+            <div class="wil-sidebar-divider"></div>
+
+            <!-- System Administration -->
+            <div class="wil-sidebar-heading">
+                System Administration
+            </div>
+
+            <nav class="nav flex-column">
+
+                <a class="nav-link {% if request.resolver_match.url_name == 'audit_log' %}active{% endif %}"
+                   href="{% url 'core:audit_log' %}">
+                    <span class="nav-icon">&#9673;</span>
+                    System Audit Log
+                </a>
+
+            </nav>
+
+            <div class="wil-sidebar-divider"></div>
+
+            <!-- Preferences -->
+            <div class="wil-sidebar-heading">
+                Preferences
+            </div>
+
+            <nav class="nav flex-column">
+
+                <a class="nav-link {% if request.resolver_match.url_name == 'settings' %}active{% endif %}"
+                   href="{% url 'core:settings' %}">
+                    <span class="nav-icon">&#9881;</span>
+                    Settings
+                </a>
+
+            </nav>
+
+            <div class="wil-sidebar-divider"></div>
+
+            <!-- Sidebar Footer -->
+            <div class="px-3 pt-2">
+                <p class="text-body-secondary small mb-1">
+                    WIL Placement System
+                </p>
+
+                <p class="text-body-secondary" style="font-size: 0.75rem;">
+                    IT Project Team 47
+                </p>
+            </div>
+
+        </aside>
+
+        <!-- Main Page Content -->
+        <main class="wil-main">
+
+            <div class="wil-content">
+
+                <!-- Django Messages -->
+                {% for message in messages %}
+
+                    <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show"
+                         role="alert">
+
+                        {{ message }}
+
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close">
+                        </button>
+
+                    </div>
+
+                {% endfor %}
+
+                <!-- Individual Page Content -->
+                {% block content %}
+                {% endblock %}
+
+                <!-- Footer -->
+                <footer class="wil-page-footer">
+                    WIL Placement Management System &middot; IT Project Team 47
+                </footer>
+
+            </div>
+
+        </main>
+
     </div>
-  </nav>
-  <main class="container pb-5">
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags|default:'info' }}">{{ message }}</div>
-    {% endfor %}
-    {% block content %}{% endblock %}
-  </main>
-  <script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
 </body>
 </html>
+
+

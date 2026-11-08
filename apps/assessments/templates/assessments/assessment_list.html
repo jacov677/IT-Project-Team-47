@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment Records · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+        <div>
+            <h1 class="h3">Assessment Records</h1>
+            <p class="text-body-secondary mb-0">
+                View and manage student workplace placement assessments.
+            </p>
+        </div>
+
+        <a href="{% url 'assessments:result_capture' %}"
+           class="btn btn-primary">
+            Capture Result
+        </a>
+
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Total Records</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Pending Evaluation</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Ready for Results</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Results Captured</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Filters -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <h5 class="fw-semibold mb-3">Search and Filter Assessments</h5>
+
+            <div class="row g-3">
+
+                <div class="col-md-5">
+                    <label class="form-label">Search Student</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search by student name or number..."
+                           disabled>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Assessment Status</label>
+                    <select class="form-select" disabled>
+                        <option>All Statuses</option>
+                        <option>Pending Evaluation</option>
+                        <option>Ready for Results</option>
+                        <option>Completed</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Organisation</label>
+                    <select class="form-select" disabled>
+                        <option>All Organisations</option>
+                    </select>
+                </div>
+
+                <div class="col-md-1 d-flex align-items-end">
+                    <button class="btn btn-outline-secondary w-100"
+                            type="button"
+                            disabled>
+                        ↻
+                    </button>
+                </div>
+
+            </div>
+
+            <small class="text-body-secondary d-block mt-2">
+                Search and filtering will be enabled during database integration.
+            </small>
+
+        </div>
+    </div>
+
+    <!-- Assessment Records Table -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+
+                <div>
+                    <h5 class="fw-semibold mb-1">All Assessment Records</h5>
+                    <p class="text-body-secondary mb-0">
+                        Student assessment and result information.
+                    </p>
+                </div>
+
+                <span class="badge bg-secondary-subtle text-secondary">
+                    0 Records
+                </span>
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Student Number</th>
+                            <th>Student Name</th>
+                            <th>Organisation</th>
+                            <th>Mentor Evaluation</th>
+                            <th>Final Mark</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td colspan="7"
+                                class="text-center text-body-secondary py-5">
+
+                                <div class="mb-2">
+                                    <span class="fs-2">📋</span>
+                                </div>
+
+                                <strong>No assessment records found.</strong>
+
+                                <p class="mb-0 small">
+                                    Assessment records will appear here once
+                                    student placement data is available.
+                                </p>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Development Notice -->
+    <div class="alert alert-info border-0 mt-4 mb-0">
+        <strong>Development Notice:</strong>
+        Assessment records, search filters and status information
+        are awaiting database integration.
+    </div>
+
+</div>
+
+{% endblock %}
+

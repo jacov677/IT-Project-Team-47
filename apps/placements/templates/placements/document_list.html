@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+{% block title %}Placement Documents · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page heading -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+        <div>
+            <h1 class="h3 fw-bold mb-1">Document Management</h1>
+            <p class="text-body-secondary mb-0">
+                Manage and monitor documents submitted for student workplace placements.
+            </p>
+        </div>
+
+        <a href="{% url 'placements:index' %}"
+           class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+
+    </div>
+
+    <!-- Document statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-sm-6 col-xl-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary small mb-1">Total Documents</p>
+                            <h3 class="fw-bold mb-0">0</h3>
+                        </div>
+                        <div class="rounded-3 bg-primary-subtle text-primary p-3">
+                            <i class="bi bi-folder2 fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">All placement documents</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary small mb-1">Uploaded Documents</p>
+                            <h3 class="fw-bold mb-0">0</h3>
+                        </div>
+                        <div class="rounded-3 bg-success-subtle text-success p-3">
+                            <i class="bi bi-file-earmark-check fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Successfully uploaded</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-body-secondary small mb-1">Pending Documents</p>
+                            <h3 class="fw-bold mb-0">0</h3>
+                        </div>
+                        <div class="rounded-3 bg-warning-subtle text-warning p-3">
+                            <i class="bi bi-clock-history fs-4"></i>
+                        </div>
+                    </div>
+                    <small class="text-body-secondary">Awaiting submission or review</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Document upload -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center gap-2 mb-4">
+                <div class="rounded-3 bg-primary-subtle text-primary p-2">
+                    <i class="bi bi-cloud-arrow-up fs-5"></i>
+                </div>
+
+                <div>
+                    <h5 class="fw-semibold mb-0">Upload Placement Document</h5>
+                    <p class="text-body-secondary small mb-0">
+                        Attach a document to an existing placement record.
+                    </p>
+                </div>
+            </div>
+
+            <form>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">
+                            Placement ID <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Enter placement reference ID"
+                               required>
+
+                        <div class="form-text">
+                            Specify the placement associated with this document.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">
+                            Document Type <span class="text-danger">*</span>
+                        </label>
+
+                        <select class="form-select" required>
+                            <option selected disabled value="">
+                                Select document type
+                            </option>
+                            <option>Placement Letter</option>
+                            <option>Workplace Agreement</option>
+                            <option>Signed Placement Form</option>
+                            <option>Supporting Document</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+
+                        <label class="form-label fw-semibold">
+                            Select Document <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="border rounded-3 p-4 text-center bg-body-tertiary">
+
+                            <i class="bi bi-file-earmark-arrow-up text-primary"
+                               style="font-size: 2.5rem;"></i>
+
+                            <h6 class="fw-semibold mt-3">Choose a document to upload</h6>
+
+                            <p class="text-body-secondary small mb-3">
+                                Select a file from your computer.
+                            </p>
+
+                            <input type="file"
+                                   class="form-control"
+                                   required>
+
+                            <p class="text-body-secondary small mt-2 mb-0">
+                                File restrictions and permitted formats will be configured
+                                during secure document storage integration.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                    <p class="text-body-secondary small mb-0">
+                        <i class="bi bi-shield-lock"></i>
+                        Secure upload functionality is pending integration.
+                    </p>
+
+                    <button type="button" class="btn btn-primary" disabled>
+                        <i class="bi bi-cloud-upload"></i> Upload Document
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Document records -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <div class="mb-4">
+                <h5 class="fw-semibold mb-1">Document Records</h5>
+                <p class="text-body-secondary small mb-0">
+                    View documents associated with registered workplace placements.
+                </p>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Document ID</th>
+                            <th>Placement ID</th>
+                            <th>Document Type</th>
+                            <th>File Name</th>
+                            <th>Upload Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+
+                                <i class="bi bi-folder-x text-body-secondary"
+                                   style="font-size: 3rem;"></i>
+
+                                <h6 class="fw-semibold mt-3">
+                                    No Documents Available
+                                </h6>
+
+                                <p class="text-body-secondary small mb-0">
+                                    Documents uploaded to placement records will appear here.
+                                </p>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
