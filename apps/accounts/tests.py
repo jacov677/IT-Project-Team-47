@@ -204,3 +204,7 @@ class DashboardRedirectTests(TestCase):
         User.objects.create_user(username="c@test.com", email="c@test.com", password="Pass12345!", role=User.Role.COORDINATOR)
         response = self.client.post(reverse("accounts:login"), {"username": "c@test.com", "password": "Pass12345!"})
         self.assertRedirects(response, reverse("accounts:dashboard"), fetch_redirect_response=False)
+
+
+
+
