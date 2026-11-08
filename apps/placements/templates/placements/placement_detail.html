@@ -1,65 +1,118 @@
+
 {% extends "base.html" %}
 
-{% block title %}Placement Details · WIL Placement System{% endblock %}
+{% block title %}Placement Details{% endblock %}
 
 {% block content %}
+<div class="container-fluid py-4">
 
-<div class="container-fluid">
-
-    <!-- Page heading -->
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
         <div>
-            <h1 class="h3 fw-bold mb-1">Placement Details</h1>
-            <p class="text-body-secondary mb-0">
-                View and monitor individual student workplace placement records.
+            <h2 class="fw-bold mb-1">Placement Details</h2>
+            <p class="text-muted mb-0">
+                View complete information about this student placement.
             </p>
         </div>
 
-        <a href="{% url 'placements:placement_list' %}"
-           class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left"></i> Back to Placements
-        </a>
+        <div class="d-flex gap-2">
+            <a href="{% url 'placements:placement_list' %}"
+               class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i>
+                Back to Placements
+            </a>
+
+            <a href="{% url 'placements:add_document' placement.pk %}"
+               class="btn btn-primary">
+                <i class="bi bi-upload me-1"></i>
+                Upload Document
+            </a>
+        </div>
     </div>
 
-    <!-- Placement overview -->
+    <!-- Placement Overview -->
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-body p-4">
 
-            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
-
+            <div class="d-flex justify-content-between align-items-start flex-wrap">
                 <div>
-                    <p class="text-body-secondary small mb-1">Placement Reference</p>
-                    <h4 class="fw-bold mb-2">Placement #Not Assigned</h4>
-                    <p class="text-body-secondary mb-0">
-                        Student workplace placement record
+                    <span class="text-muted small">PLACEMENT REFERENCE</span>
+                    <h3 class="fw-bold mt-1 mb-2">
+                        #{{ placement.pk }}
+                    </h3>
+
+                    <h5 class="mb-2">
+                        {{ placement.title }}
+                    </h5>
+
+                    <p class="text-muted mb-0">
+                        {{ placement.organisation.organisation_name }}
                     </p>
                 </div>
 
                 <div>
-                    <span class="badge bg-secondary px-3 py-2">
-                        Not Assigned
-                    </span>
+                    {% if placement.status == "PENDING" %}
+                        <span class="badge bg-warning text-dark fs-6">
+                            {{ placement.get_status_display }}
+                        </span>
+                    {% elif placement.status == "APPROVED" %}
+                        <span class="badge bg-info text-dark fs-6">
+                            {{ placement.get_status_display }}
+                        </span>
+                    {% elif placement.status == "ACTIVE" %}
+                        <span class="badge bg-success fs-6">
+                            {{ placement.get_status_display }}
+                        </span>
+                    {% elif placement.status == "COMPLETED" %}
+                        <span class="badge bg-primary fs-6">
+                            {{ placement.get_status_display }}
+                        </span>
+                    {% elif placement.status == "REJECTED" %}
+                        <span class="badge bg-danger fs-6">
+                            {{ placement.get_status_display }}
+                        </span>
+                    {% else %}
+                        <span class="badge bg-secondary fs-6">
+                            {{ placement.get_status_display }}
+                        </span>
+                    {% endif %}
                 </div>
-
             </div>
 
-            <hr>
+            <hr class="my-4">
 
-            <div class="row g-3">
+            <div class="row g-4">
 
-                <div class="col-md-4">
-                    <p class="text-body-secondary small mb-1">Start Date</p>
-                    <h6 class="fw-semibold mb-0">Not available</h6>
+                <div class="col-md-3">
+                    <small class="text-muted">Start Date</small>
+                    <h6 class="fw-semibold mt-1">
+                        {{ placement.start_date|date:"d M Y" }}
+                    </h6>
                 </div>
 
-                <div class="col-md-4">
-                    <p class="text-body-secondary small mb-1">End Date</p>
-                    <h6 class="fw-semibold mb-0">Not available</h6>
+                <div class="col-md-3">
+                    <small class="text-muted">End Date</small>
+                    <h6 class="fw-semibold mt-1">
+                        {{ placement.end_date|date:"d M Y" }}
+                    </h6>
                 </div>
 
-                <div class="col-md-4">
-                    <p class="text-body-secondary small mb-1">Approval Date</p>
-                    <h6 class="fw-semibold mb-0">Not available</h6>
+                <div class="col-md-3">
+                    <small class="text-muted">Created On</small>
+                    <h6 class="fw-semibold mt-1">
+                        {{ placement.created_at|date:"d M Y" }}
+                    </h6>
+                </div>
+
+                <div class="col-md-3">
+                    <small class="text-muted">Approved On</small>
+                    <h6 class="fw-semibold mt-1">
+                        {% if placement.approved_at %}
+                            {{ placement.approved_at|date:"d M Y" }}
+                        {% else %}
+                            Not yet approved
+                        {% endif %}
+                    </h6>
                 </div>
 
             </div>
@@ -67,207 +120,252 @@
         </div>
     </div>
 
-    <!-- Information cards -->
     <div class="row g-4">
 
-        <!-- Student information -->
+        <!-- Student Information -->
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm h-100">
 
-                <div class="card-body p-4">
+                <div class="card-header bg-white py-3">
+                    <h5 class="fw-bold mb-0">
+                        <i class="bi bi-person me-2 text-primary"></i>
+                        Student Information
+                    </h5>
+                </div>
 
-                    <div class="d-flex align-items-center gap-2 mb-4">
-                        <div class="rounded-3 bg-primary-subtle text-primary p-2">
-                            <i class="bi bi-person fs-5"></i>
-                        </div>
-                        <h5 class="fw-semibold mb-0">Student Information</h5>
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <small class="text-muted">Student Number</small>
+                        <p class="fw-semibold mb-0">
+                            {{ placement.student.student_number }}
+                        </p>
                     </div>
 
                     <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Student Number</p>
-                        <p class="fw-semibold mb-0">Not assigned</p>
-                    </div>
-
-                    <hr>
-
-                    <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">First Name</p>
-                        <p class="fw-semibold mb-0">Not available</p>
+                        <small class="text-muted">Full Name</small>
+                        <p class="fw-semibold mb-0">
+                            {{ placement.student.first_name }}
+                            {{ placement.student.last_name }}
+                        </p>
                     </div>
 
                     <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Last Name</p>
-                        <p class="fw-semibold mb-0">Not available</p>
-                    </div>
-
-                    <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Qualification</p>
-                        <p class="fw-semibold mb-0">Not available</p>
+                        <small class="text-muted">Qualification</small>
+                        <p class="fw-semibold mb-0">
+                            {{ placement.student.qualification|default:"Not provided" }}
+                        </p>
                     </div>
 
                     <div>
-                        <p class="text-body-secondary small mb-1">Contact Number</p>
-                        <p class="fw-semibold mb-0">Not available</p>
+                        <small class="text-muted">Contact Number</small>
+                        <p class="fw-semibold mb-0">
+                            {{ placement.student.contact_number|default:"Not provided" }}
+                        </p>
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <!-- Organisation information -->
+        <!-- Organisation Information -->
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm h-100">
 
-                <div class="card-body p-4">
+                <div class="card-header bg-white py-3">
+                    <h5 class="fw-bold mb-0">
+                        <i class="bi bi-building me-2 text-primary"></i>
+                        Host Organisation
+                    </h5>
+                </div>
 
-                    <div class="d-flex align-items-center gap-2 mb-4">
-                        <div class="rounded-3 bg-info-subtle text-info p-2">
-                            <i class="bi bi-building fs-5"></i>
-                        </div>
-                        <h5 class="fw-semibold mb-0">Organisation Information</h5>
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <small class="text-muted">Organisation Name</small>
+                        <p class="fw-semibold mb-0">
+                            {{ placement.organisation.organisation_name }}
+                        </p>
                     </div>
 
                     <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Organisation Name</p>
-                        <p class="fw-semibold mb-0">Not assigned</p>
-                    </div>
-
-                    <hr>
-
-                    <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Industry</p>
-                        <p class="fw-semibold mb-0">Not available</p>
+                        <small class="text-muted">Industry</small>
+                        <p class="fw-semibold mb-0">
+                            {{ placement.organisation.industry|default:"Not provided" }}
+                        </p>
                     </div>
 
                     <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Address</p>
-                        <p class="fw-semibold mb-0">Not available</p>
+                        <small class="text-muted">Address</small>
+                        <p class="fw-semibold mb-0">
+                            {{ placement.organisation.address|default:"Not provided" }}
+                        </p>
                     </div>
 
                     <div>
-                        <p class="text-body-secondary small mb-1">Contact Email</p>
-                        <p class="fw-semibold mb-0">Not available</p>
+                        <small class="text-muted">Contact Email</small>
+                        <p class="fw-semibold mb-0">
+                            {{ placement.organisation.contact_email|default:"Not provided" }}
+                        </p>
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <!-- Supervision information -->
+        <!-- Supervision Information -->
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm h-100">
 
-                <div class="card-body p-4">
+                <div class="card-header bg-white py-3">
+                    <h5 class="fw-bold mb-0">
+                        <i class="bi bi-people me-2 text-primary"></i>
+                        Supervision Details
+                    </h5>
+                </div>
 
-                    <div class="d-flex align-items-center gap-2 mb-4">
-                        <div class="rounded-3 bg-success-subtle text-success p-2">
-                            <i class="bi bi-people fs-5"></i>
-                        </div>
-                        <h5 class="fw-semibold mb-0">Supervision Information</h5>
-                    </div>
-
-                    <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Assigned Mentor</p>
-                        <p class="fw-semibold mb-0">Not assigned</p>
-                    </div>
-
-                    <hr>
+                <div class="card-body">
 
                     <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Coordinator</p>
-                        <p class="fw-semibold mb-0">Not assigned</p>
+                        <small class="text-muted">Workplace Mentor</small>
+                        <p class="fw-semibold mb-0">
+                            {% if placement.mentor %}
+                                {{ placement.mentor.first_name }}
+                                {{ placement.mentor.last_name }}
+                            {% else %}
+                                Not assigned
+                            {% endif %}
+                        </p>
                     </div>
 
                     <div>
-                        <p class="text-body-secondary small mb-1">Approval Date</p>
-                        <p class="fw-semibold mb-0">Not available</p>
+                        <small class="text-muted">Assigned Coordinator</small>
+                        <p class="fw-semibold mb-0">
+                            {% if placement.coordinator %}
+                                {{ placement.coordinator.first_name }}
+                                {{ placement.coordinator.last_name }}
+                            {% else %}
+                                Not assigned
+                            {% endif %}
+                        </p>
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <!-- Placement status -->
+        <!-- Placement Description -->
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm h-100">
 
-                <div class="card-body p-4">
-
-                    <div class="d-flex align-items-center gap-2 mb-4">
-                        <div class="rounded-3 bg-warning-subtle text-warning p-2">
-                            <i class="bi bi-clipboard-check fs-5"></i>
-                        </div>
-                        <h5 class="fw-semibold mb-0">Placement Status</h5>
-                    </div>
-
-                    <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Current Status</p>
-                        <span class="badge bg-secondary px-3 py-2">
-                            Not Assigned
-                        </span>
-                    </div>
-
-                    <hr>
-
-                    <div class="mb-3">
-                        <p class="text-body-secondary small mb-1">Placement Start</p>
-                        <p class="fw-semibold mb-0">Not available</p>
-                    </div>
-
-                    <div>
-                        <p class="text-body-secondary small mb-1">Placement End</p>
-                        <p class="fw-semibold mb-0">Not available</p>
-                    </div>
-
+                <div class="card-header bg-white py-3">
+                    <h5 class="fw-bold mb-0">
+                        <i class="bi bi-file-text me-2 text-primary"></i>
+                        Placement Description
+                    </h5>
                 </div>
+
+                <div class="card-body">
+                    {% if placement.description %}
+                        <p class="mb-0">
+                            {{ placement.description|linebreaksbr }}
+                        </p>
+                    {% else %}
+                        <p class="text-muted mb-0">
+                            No placement description provided.
+                        </p>
+                    {% endif %}
+                </div>
+
             </div>
         </div>
 
     </div>
 
-    <!-- Documents section -->
+    <!-- Documents -->
     <div class="card border-0 shadow-sm mt-4">
 
-        <div class="card-body p-4">
+        <div class="card-header bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold mb-0">
+                    <i class="bi bi-folder2-open me-2 text-primary"></i>
+                    Placement Documents
+                </h5>
 
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-
-                <div class="d-flex align-items-center gap-2">
-                    <div class="rounded-3 bg-primary-subtle text-primary p-2">
-                        <i class="bi bi-folder2-open fs-5"></i>
-                    </div>
-                    <div>
-                        <h5 class="fw-semibold mb-0">Placement Documents</h5>
-                        <p class="text-body-secondary small mb-0">
-                            Documents associated with this placement.
-                        </p>
-                    </div>
-                </div>
-
-                <a href="{% url 'placements:document_list' %}"
-                   class="btn btn-outline-primary btn-sm">
-                    View All Documents
+                <a href="{% url 'placements:add_document' placement.pk %}"
+                   class="btn btn-sm btn-outline-primary">
+                    Upload Document
                 </a>
-
             </div>
+        </div>
 
-            <div class="text-center py-4">
-                <i class="bi bi-file-earmark-text text-body-secondary"
-                   style="font-size: 2.5rem;"></i>
+        <div class="card-body p-0">
 
-                <h6 class="fw-semibold mt-3">No Documents Available</h6>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
 
-                <p class="text-body-secondary small mb-0">
-                    Uploaded placement documents will appear here once available.
-                </p>
+                    <thead class="table-light">
+                        <tr>
+                            <th>Document Title</th>
+                            <th>Document Type</th>
+                            <th>Upload Date</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for document in documents %}
+                            <tr>
+
+                                <td class="fw-semibold">
+                                    {{ document.title }}
+                                </td>
+
+                                <td>
+                                    {{ document.get_document_type_display }}
+                                </td>
+
+                                <td>
+                                    {{ document.uploaded_at|date:"d M Y" }}
+                                </td>
+
+                                <td>
+                                    {% if document.file_path %}
+                                        <a href="{{ document.file_path.url }}"
+                                           target="_blank"
+                                           rel="noopener noreferrer"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-download me-1"></i>
+                                            View File
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">No file</span>
+                                    {% endif %}
+                                </td>
+
+                            </tr>
+
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center py-4">
+                                    <i class="bi bi-file-earmark fs-2 text-muted"></i>
+                                    <p class="text-muted mt-2 mb-0">
+                                        No documents have been uploaded for this placement.
+                                    </p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
             </div>
 
         </div>
-
     </div>
 
 </div>
-
 {% endblock %}
 
 

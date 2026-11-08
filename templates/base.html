@@ -219,17 +219,17 @@
                             aria-controls="wilSidebar"
                             aria-expanded="false"
                             aria-label="Toggle navigation">
-                        ☰
+                        &#9776;
                     </button>
 
                     <a class="wil-brand" href="{% url 'core:home' %}">
-                        🎓 WIL Placement System
+                        WIL Placement System
                     </a>
 
                 </div>
 
-                <!-- User Information -->
-                <div class="d-flex align-items-center gap-2">
+                <!-- User Information and Logout -->
+                <div class="d-flex align-items-center gap-3">
 
                     {% if user.is_authenticated %}
 
@@ -240,6 +240,13 @@
                         <span class="wil-user-icon">
                             {{ user.username|first|upper }}
                         </span>
+
+                        <form method="post" action="{% url 'accounts:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light btn-sm">
+                                Logout
+                            </button>
+                        </form>
 
                     {% else %}
 
@@ -275,43 +282,43 @@
 
                 <a class="nav-link {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}active{% endif %}"
                    href="{% url 'core:home' %}">
-                    <span class="nav-icon">⌂</span>
+                    <span class="nav-icon">&#8962;</span>
                     Dashboard
                 </a>
 
                 <a class="nav-link {% if request.resolver_match.app_name == 'accounts' %}active{% endif %}"
                    href="{% url 'accounts:index' %}">
-                    <span class="nav-icon">♙</span>
+                    <span class="nav-icon">&#9823;</span>
                     Accounts
                 </a>
 
                 <a class="nav-link {% if request.resolver_match.app_name == 'organisations' %}active{% endif %}"
                    href="{% url 'organisations:index' %}">
-                    <span class="nav-icon">▦</span>
+                    <span class="nav-icon">&#9638;</span>
                     Organisations
                 </a>
 
                 <a class="nav-link {% if request.resolver_match.app_name == 'placements' %}active{% endif %}"
                    href="{% url 'placements:index' %}">
-                    <span class="nav-icon">▣</span>
+                    <span class="nav-icon">&#9635;</span>
                     Placements
                 </a>
 
                 <a class="nav-link {% if request.resolver_match.app_name == 'logbook' %}active{% endif %}"
                    href="{% url 'logbook:index' %}">
-                    <span class="nav-icon">▤</span>
+                    <span class="nav-icon">&#9636;</span>
                     Logbook
                 </a>
 
                 <a class="nav-link {% if request.resolver_match.app_name == 'assessments' %}active{% endif %}"
                    href="{% url 'assessments:index' %}">
-                    <span class="nav-icon">✓</span>
+                    <span class="nav-icon">&#10003;</span>
                     Assessments
                 </a>
 
                 <a class="nav-link {% if request.resolver_match.app_name == 'reports' %}active{% endif %}"
                    href="{% url 'reports:index' %}">
-                    <span class="nav-icon">▥</span>
+                    <span class="nav-icon">&#9637;</span>
                     Reports
                 </a>
 
@@ -328,7 +335,7 @@
 
                 <a class="nav-link {% if request.resolver_match.url_name == 'audit_log' %}active{% endif %}"
                    href="{% url 'core:audit_log' %}">
-                    <span class="nav-icon">◉</span>
+                    <span class="nav-icon">&#9673;</span>
                     System Audit Log
                 </a>
 
@@ -345,7 +352,7 @@
 
                 <a class="nav-link {% if request.resolver_match.url_name == 'settings' %}active{% endif %}"
                    href="{% url 'core:settings' %}">
-                    <span class="nav-icon">⚙</span>
+                    <span class="nav-icon">&#9881;</span>
                     Settings
                 </a>
 
@@ -395,7 +402,7 @@
 
                 <!-- Footer -->
                 <footer class="wil-page-footer">
-                    WIL Placement Management System · IT Project Team 47
+                    WIL Placement Management System &middot; IT Project Team 47
                 </footer>
 
             </div>
