@@ -105,8 +105,11 @@ MEDIA_ROOT = BASE_DIR / "media"
 # Login and logout (apps/accounts)
 AUTHENTICATION_BACKENDS = [
     "apps.accounts.backends.EmailBackend",  # log in with email
-    "django.contrib.auth.backends.ModelBackend",  # username still works, e.g. on /admin
+    "django.contrib.auth.backends.ModelBackend",  # username still works for example on /admin
 ]
 LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "accounts:dashboard"
 LOGOUT_REDIRECT_URL = "accounts:login"
+# Log users out after 30 minutes without activity.
+SESSION_COOKIE_AGE = 30 * 60
+SESSION_SAVE_EVERY_REQUEST = True

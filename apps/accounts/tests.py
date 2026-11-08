@@ -205,6 +205,18 @@ class DashboardRedirectTests(TestCase):
         response = self.client.post(reverse("accounts:login"), {"username": "c@test.com", "password": "Pass12345!"})
         self.assertRedirects(response, reverse("accounts:dashboard"), fetch_redirect_response=False)
 
+    def test_admin_without_staff_goes_home(self):
+        self.login_as(User.Role.ADMIN)
+        response = self.client.get(reverse("accounts:dashboard"))
+        self.assertRedirects(response, reverse("core:home"), fetch_redirect_response=False)
 
+    def test_admin_with_staff_goes_to_admin(self):
+        self.login_as(User.Role.ADMIN, is_staff=True)
+        response = self.client.get(reverse("accounts:dashboard"))
+        self.assertRedirects(response, reverse("admin:index"), fetch_redirect_response=False)
+
+    def test_session_expires_after_30_minutes(self):
+        self.login_as(User.Role.STUDENT)
+        self.assertEqual(self.client.session.get_expiry_age(), 30 * 60)
 
 

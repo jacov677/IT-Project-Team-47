@@ -54,4 +54,6 @@ def dashboard(request):
     """Send the logged-in user to the start page for their role."""
     if request.user.is_superuser:
         return redirect("admin:index")
+    if request.user.role == User.Role.ADMIN:
+        return redirect("admin:index" if request.user.is_staff else "core:home")
     return redirect(ROLE_HOME.get(request.user.role, "core:home"))
