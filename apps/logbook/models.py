@@ -1,20 +1,30 @@
-
 from django.db import models
+from apps.accounts.models import Student
+from apps.placements.models import Placement
 
-
-# Stores daily activities completed by students during placement
 class LogbookEntry(models.Model):
-    placement = models.ForeignKey(
-        "placements.Placement",
-        on_delete=models.CASCADE,
-        related_name="logbook_entries"
-    )
-    entry_date = models.DateField()
-    activities = models.TextField()
+    class Status(models.TextChoices):
+        DRAFT = "DRAFT", "Draft"
+        SUBMITTED = "SUBMITTED", "Submitted"
+        APPROVED = "APPROVED", "Approved"
+        REJECTED = "REJECTED", "Rejected"
+
+    placement = models.ForeignKey(Placement, on_delete=models.CASCADE, related_name="logbook_entries")
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="logbook_entries")
+
+    date = models.DateField()
     hours_worked = models.DecimalField(max_digits=4, decimal_places=2)
-    supervisor_comments = models.TextField(blank=True)
+    activities = models.TextField()
+    skills_learned = models.TextField(blank=True)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.DRAFT)
+    mentor_feedback = models.TextField(blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "logbook_entry"
+        ordering = ["-date"]
 
     def __str__(self):
-        # Displays the student and date of the entry
-        return f"{self.placement.student_name} - {self.entry_date}"
+        return f"{self.student} - {self.date} ({self.status})"
