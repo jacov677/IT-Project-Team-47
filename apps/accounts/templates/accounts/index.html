@@ -1,7 +1,127 @@
 {% extends "base.html" %}
+
 {% block title %}Accounts · WIL Placement System{% endblock %}
+
 {% block content %}
-<h1 class="h3">Accounts</h1>
-<p class="text-body-secondary">Login, logout, registration, user roles (Student, Mentor, Coordinator, Admin) and profiles.</p>
-<div class="alert alert-info">This module has not been built yet.</div>
+
+<div class="container-fluid">
+
+    <div class="mb-4">
+        <h1 class="h3 fw-bold">Accounts Management</h1>
+        <p class="text-body-secondary">
+            Manage system access, user roles and account profiles.
+        </p>
+    </div>
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="fw-semibold">Students</h5>
+                    <p class="text-body-secondary small">
+                        Access placement information, submit documents
+                        and manage workplace learning activities.
+                    </p>
+                    <span class="badge bg-secondary">Student Role</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="fw-semibold">Mentors</h5>
+                    <p class="text-body-secondary small">
+                        Supervise assigned students, review logbook
+                        entries and complete evaluations.
+                    </p>
+                    <span class="badge bg-secondary">Mentor Role</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="fw-semibold">Coordinators</h5>
+                    <p class="text-body-secondary small">
+                        Manage placements, monitor student progress
+                        and oversee workplace learning activities.
+                    </p>
+                    <span class="badge bg-secondary">Coordinator Role</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="fw-semibold">Administrators</h5>
+                    <p class="text-body-secondary small">
+                        Oversee system administration, account
+                        management and access control.
+                    </p>
+                    <span class="badge bg-secondary">Admin Role</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="fw-semibold mb-3">Account Management Features</h5>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="p-3 bg-body-tertiary rounded">
+                        <h6 class="fw-semibold">Authentication</h6>
+                        <p class="text-body-secondary small mb-0">
+                            Secure user login, logout and account access.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-3 bg-body-tertiary rounded">
+                        <h6 class="fw-semibold">User Profiles</h6>
+                        <p class="text-body-secondary small mb-0">
+                            Store and manage user information and profile details.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-3 bg-body-tertiary rounded">
+                        <h6 class="fw-semibold">Role Management</h6>
+                        <p class="text-body-secondary small mb-0">
+                            Assign appropriate permissions according to user roles.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-3 bg-body-tertiary rounded">
+                        <h6 class="fw-semibold">Account Security</h6>
+                        <p class="text-body-secondary small mb-0">
+                            Protect user accounts and restrict unauthorized access.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info border-0">
+        <h6 class="fw-semibold">Development Status</h6>
+        <p class="mb-0 small">
+            The Accounts interface is being prepared. Authentication,
+            user profiles and role-based access functionality will be
+            integrated with the shared database models.
+        </p>
+    </div>
+
+</div>
+
 {% endblock %}

@@ -1,7 +1,150 @@
 {% extends "base.html" %}
-{% block title %}Assessments · WIL Placement System{% endblock %}
+
+{% block title %}Assessments Dashboard · WIL Placement System{% endblock %}
+
 {% block content %}
-<h1 class="h3">Assessments</h1>
-<p class="text-body-secondary">Mentor evaluations and final WIL results.</p>
-<div class="alert alert-info">This module has not been built yet.</div>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h1 class="h3">Assessments Dashboard</h1>
+        <p class="text-body-secondary">
+            Manage student assessments, capture final results and monitor assessment progress.
+        </p>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Total Assessments</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                    <small class="text-body-secondary">Registered assessments</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Awaiting Evaluation</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                    <small class="text-body-secondary">Pending mentor evaluations</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Awaiting Results</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                    <small class="text-body-secondary">Ready for result capture</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Results Captured</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                    <small class="text-body-secondary">Completed assessments</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <h5 class="fw-semibold mb-3">Assessment Management</h5>
+
+            <div class="d-flex flex-wrap gap-2">
+
+                <a href="{% url 'assessments:assessment_list' %}"
+                   class="btn btn-primary">
+                    View Assessments
+                </a>
+
+                <a href="{% url 'assessments:assessment_detail' %}"
+                   class="btn btn-outline-primary">
+                    Assessment Details
+                </a>
+
+                <a href="{% url 'assessments:result_capture' %}"
+                   class="btn btn-outline-primary">
+                    Capture Results
+                </a>
+
+                <a href="{% url 'assessments:assessment_history' %}"
+                   class="btn btn-outline-secondary">
+                    Assessment History
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Recent Assessments -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h5 class="fw-semibold mb-1">Recent Assessments</h5>
+                    <p class="text-body-secondary mb-0">
+                        Overview of recently assessed students.
+                    </p>
+                </div>
+
+                <a href="{% url 'assessments:assessment_list' %}"
+                   class="btn btn-sm btn-outline-primary">
+                    View All
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Student</th>
+                            <th>Organisation</th>
+                            <th>Assessment Status</th>
+                            <th>Final Mark</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td colspan="5"
+                                class="text-center text-body-secondary py-4">
+                                No assessment records available yet.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Development Notice -->
+    <div class="alert alert-info border-0 mb-0">
+        <strong>Development Notice:</strong>
+        Assessment statistics and student records will become available
+        once database integration and result processing are implemented.
+    </div>
+
+</div>
+
 {% endblock %}

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment History · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+        <div>
+            <h1 class="h3">Assessment History</h1>
+            <p class="text-body-secondary mb-0">
+                Review previously captured student assessment results.
+            </p>
+        </div>
+
+        <a href="{% url 'assessments:assessment_list' %}"
+           class="btn btn-outline-secondary">
+            Back to Assessments
+        </a>
+
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Total Results</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                    <small class="text-body-secondary">Captured results</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Average Mark</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                    <small class="text-body-secondary">Overall average</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Highest Mark</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                    <small class="text-body-secondary">Highest recorded result</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-body-secondary mb-1">Lowest Mark</p>
+                    <h3 class="fw-bold mb-0">—</h3>
+                    <small class="text-body-secondary">Lowest recorded result</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <h5 class="fw-semibold mb-3">Search Assessment History</h5>
+
+            <div class="row g-3">
+
+                <div class="col-md-5">
+                    <label class="form-label">Search Student</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search by student name or number..."
+                           disabled>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Organisation</label>
+                    <select class="form-select" disabled>
+                        <option>All Organisations</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Captured By</label>
+                    <select class="form-select" disabled>
+                        <option>All Coordinators</option>
+                    </select>
+                </div>
+
+                <div class="col-md-1 d-flex align-items-end">
+                    <button type="button"
+                            class="btn btn-outline-secondary w-100"
+                            disabled>
+                        ↻
+                    </button>
+                </div>
+
+            </div>
+
+            <small class="text-body-secondary d-block mt-2">
+                Search and filtering will be enabled during database integration.
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- Historical Results -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+
+                <div>
+                    <h5 class="fw-semibold mb-1">Previously Captured Results</h5>
+                    <p class="text-body-secondary mb-0">
+                        Historical student assessment records.
+                    </p>
+                </div>
+
+                <span class="badge bg-secondary-subtle text-secondary">
+                    0 Results
+                </span>
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Student Number</th>
+                            <th>Student Name</th>
+                            <th>Organisation</th>
+                            <th>Final Mark (%)</th>
+                            <th>Captured By</th>
+                            <th>Date Captured</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td colspan="7"
+                                class="text-center text-body-secondary py-5">
+
+                                <div class="mb-2">
+                                    <span class="fs-2">📊</span>
+                                </div>
+
+                                <strong>No assessment history available.</strong>
+
+                                <p class="mb-0 small">
+                                    Previously captured assessment results
+                                    will appear here.
+                                </p>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Development Notice -->
+    <div class="alert alert-info border-0 mt-4 mb-0">
+        <strong>Development Notice:</strong>
+        Historical assessment records, result statistics and search filters
+        will be populated through database integration.
+    </div>
+
+</div>
+
+{% endblock %}

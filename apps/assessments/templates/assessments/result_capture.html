@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Capture Assessment Result · WIL Placement System{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+            <h1 class="h3">Capture Assessment Result</h1>
+            <p class="text-body-secondary mb-0">
+                Record the final assessment mark for a student's workplace placement.
+            </p>
+        </div>
+
+        <a href="{% url 'assessments:assessment_list' %}"
+           class="btn btn-outline-secondary">
+            Back to Assessments
+        </a>
+    </div>
+
+    <!-- Important Notice -->
+    <div class="alert alert-info border-0 mb-4">
+        <strong>Assessment Requirements:</strong>
+        A final result should only be captured after the student's required
+        logbook entries have been completed and the mentor evaluation has been submitted.
+    </div>
+
+    <!-- Result Capture Form -->
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <h5 class="fw-semibold mb-4">Student and Placement Information</h5>
+
+            <form>
+
+                <!-- Student Details -->
+                <div class="mb-4">
+
+                    <h6 class="fw-semibold mb-3">Student Details</h6>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Student Number</label>
+                            <select class="form-select" disabled>
+                                <option selected>Select Student</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Student Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Student name will appear here"
+                                   disabled>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <!-- Placement Details -->
+                <div class="mb-4">
+
+                    <h6 class="fw-semibold mb-3">Placement Details</h6>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Host Organisation</label>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Organisation name"
+                                   disabled>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Assigned Mentor</label>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Mentor name"
+                                   disabled>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <!-- Assessment Requirements -->
+                <div class="mb-4">
+
+                    <h6 class="fw-semibold mb-3">Assessment Requirements</h6>
+
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Requirement</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Logbook Completion</td>
+                                    <td>Required placement hours and mentor sign-offs.</td>
+                                    <td>
+                                        <span class="badge bg-secondary">Not verified</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Mentor Evaluation</td>
+                                    <td>Mentor feedback and evaluation submission.</td>
+                                    <td>
+                                        <span class="badge bg-secondary">Not verified</span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <small class="text-body-secondary">
+                        Eligibility checks will be connected to the logbook and evaluation modules.
+                    </small>
+
+                </div>
+
+                <hr class="my-4">
+
+                <!-- Final Result -->
+                <div class="mb-4">
+
+                    <h6 class="fw-semibold mb-3">Final Assessment Result</h6>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                Final Mark (%)
+                            </label>
+
+                            <input type="number"
+                                   class="form-control"
+                                   placeholder="Enter mark between 0 and 100"
+                                   min="0"
+                                   max="100"
+                                   step="0.01"
+                                   disabled>
+
+                            <small class="text-body-secondary">
+                                The final mark must be between 0 and 100.
+                            </small>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Captured By</label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Logged-in coordinator"
+                                   disabled>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <!-- Form Actions -->
+                <div class="d-flex justify-content-end flex-wrap gap-2">
+
+                    <a href="{% url 'assessments:assessment_list' %}"
+                       class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+
+                    <button type="button"
+                            class="btn btn-primary"
+                            disabled>
+                        Save Assessment Result
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Development Notice -->
+    <div class="alert alert-info border-0 mb-0">
+        <strong>Development Notice:</strong>
+        Student selection, eligibility verification and result submission
+        will be activated during database integration.
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,5 +1,4 @@
 Django>=5.2,<5.3        # 5.2 is the Long Term Support release
 python-dotenv>=1.0      # reads settings from the .env file
 
-# When the team switches to MySQL (DB_ENGINE=mysql in .env), also run:
-#   pip install mysqlclient
+mysqlclient>=2.2         # MySQL driver (Phase 4 section 4.4.6); see README for Mac/Windows install

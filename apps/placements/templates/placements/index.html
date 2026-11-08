@@ -1,70 +1,207 @@
 
 {% extends "base.html" %}
-{% block title %}Placements · WIL Placement System{% endblock %}
+
+{% block title %}Coordinator Dashboard · WIL Placement System{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="container-fluid">
+
+    <!-- Welcome Heading -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
         <div>
-            <h1 class="h3">Placements</h1>
-            <p class="text-body-secondary">
-                Manage placement requests and workplace information.
+            <h1 class="h3 fw-bold mb-1">Coordinator Dashboard</h1>
+            <p class="text-body-secondary mb-0">
+                Overview of workplace placements and student progress.
             </p>
         </div>
 
-        <a href="{% url 'placements:add_placement' %}"
+        <a href="{% url 'placements:placement_create' %}"
            class="btn btn-primary">
-            Add Placement
+            + Create Placement
         </a>
     </div>
 
-    <div class="card shadow-sm">
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="text-body-secondary mb-2">Total Placements</p>
+                            <h2 class="fw-bold mb-0">—</h2>
+                        </div>
+                        <div class="fs-2 text-primary">▣</div>
+                    </div>
+                    <small class="text-body-secondary">All registered placements</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="text-body-secondary mb-2">Pending Approvals</p>
+                            <h2 class="fw-bold mb-0">—</h2>
+                        </div>
+                        <div class="fs-2 text-warning">◷</div>
+                    </div>
+                    <small class="text-body-secondary">Awaiting coordinator review</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="text-body-secondary mb-2">Active Placements</p>
+                            <h2 class="fw-bold mb-0">—</h2>
+                        </div>
+                        <div class="fs-2 text-success">✓</div>
+                    </div>
+                    <small class="text-body-secondary">Students currently placed</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="text-body-secondary mb-2">Completed Placements</p>
+                            <h2 class="fw-bold mb-0">—</h2>
+                        </div>
+                        <div class="fs-2 text-info">★</div>
+                    </div>
+                    <small class="text-body-secondary">Successfully completed</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main Dashboard Sections -->
+    <div class="row g-4 mb-4">
+
+        <!-- Pending Approvals -->
+        <div class="col-lg-7">
+            <div class="card shadow-sm h-100">
+
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Pending Placement Approvals</h5>
+                    <span class="badge bg-warning text-dark">Awaiting review</span>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="text-center py-4">
+                        <div class="fs-1 text-secondary mb-2">▤</div>
+
+                        <h6>No placement records available yet</h6>
+
+                        <p class="text-body-secondary small mb-3">
+                            Pending placement requests will appear here
+                            once database integration is complete.
+                        </p>
+
+                        <a href="{% url 'placements:placement_list' %}"
+                           class="btn btn-outline-primary btn-sm">
+                            View All Placements
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm h-100">
+
+                <div class="card-header py-3">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="d-grid gap-3">
+
+                        <a href="{% url 'placements:placement_create' %}"
+                           class="btn btn-primary text-start">
+                            + Create New Placement
+                        </a>
+
+                        <a href="{% url 'placements:placement_list' %}"
+                           class="btn btn-outline-primary text-start">
+                            View and Manage Placements
+                        </a>
+
+                        <a href="{% url 'placements:document_list' %}"
+                           class="btn btn-outline-primary text-start">
+                            Manage Placement Documents
+                        </a>
+
+                        <a href="{% url 'reports:index' %}"
+                           class="btn btn-outline-success text-start">
+                            View Coordinator Reports
+                        </a>
+
+                        <a href="{% url 'core:audit_log' %}"
+                           class="btn btn-outline-dark text-start">
+                            View System Audit Log
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recent Activities -->
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header py-3">
+            <h5 class="mb-0">Recent System Activities</h5>
+        </div>
+
         <div class="card-body">
-            <h2 class="h5 mb-3">Placement Records</h2>
 
-            {% if placements %}
-                <div class="table-responsive">
-                    <table class="table table-striped align-middle">
-                        <thead>
-                            <tr>
-                                <th>Student</th>
-                                <th>Organisation</th>
-                                <th>Position</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
+            <div class="text-center py-4">
 
-                        <tbody>
-                            {% for placement in placements %}
-                            <tr>
-                                <td>{{ placement.student }}</td>
-                                <td>{{ placement.organisation.organisation_name }}</td>
-                                <td>{{ placement.title }}</td>
-                                <td>{{ placement.start_date }}</td>
-                                <td>{{ placement.end_date }}</td>
-                                <td>{{ placement.get_status_display }}</td>
-                                <td>
-                                    <a href="{% url 'placements:placement_detail' placement.pk %}"
-                                       class="btn btn-sm btn-outline-primary">
-                                        View
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {% else %}
-                <div class="alert alert-info mb-0">
-                    No placement records have been added yet.
-                </div>
-            {% endif %}
+                <div class="fs-1 text-secondary mb-2">◷</div>
+
+                <h6>No recent activities available</h6>
+
+                <p class="text-body-secondary small mb-3">
+                    Placement approvals, document uploads and other
+                    system activities will appear here once audit logging
+                    is integrated.
+                </p>
+
+                <a href="{% url 'core:audit_log' %}"
+                   class="btn btn-outline-secondary btn-sm">
+                    Open Audit Log
+                </a>
+
+            </div>
+
         </div>
     </div>
 
 </div>
+
 {% endblock %}
+
+
+
+
+
