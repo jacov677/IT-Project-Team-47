@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
+from apps.accounts.decorators import role_required
+from apps.accounts.models import User
+
 from apps.placements.models import Placement
 from .models import LogbookEntry
 from .forms import LogbookEntryForm
 
 
 # Show available placements
+@role_required(User.Role.STUDENT, User.Role.MENTOR, User.Role.COORDINATOR)
 def index(request):
     placements = Placement.objects.all().order_by("-created_at")
 
@@ -16,6 +20,7 @@ def index(request):
 
 
 # Display entries for a selected placement
+@role_required(User.Role.STUDENT, User.Role.MENTOR, User.Role.COORDINATOR)
 def placement_entries(request, placement_id):
     placement = get_object_or_404(Placement, pk=placement_id)
 
@@ -30,6 +35,7 @@ def placement_entries(request, placement_id):
 
 
 # Add a new logbook entry
+@role_required(User.Role.STUDENT, User.Role.MENTOR, User.Role.COORDINATOR)
 def add_entry(request, placement_id):
     placement = get_object_or_404(Placement, pk=placement_id)
 
@@ -54,6 +60,7 @@ def add_entry(request, placement_id):
     })
 
 # Delete a logbook entry
+@role_required(User.Role.STUDENT, User.Role.MENTOR, User.Role.COORDINATOR)
 def delete_entry(request, placement_id, entry_id):
     placement = get_object_or_404(Placement, pk=placement_id)
 
