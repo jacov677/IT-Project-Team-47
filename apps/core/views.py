@@ -1,4 +1,9 @@
+
 from django.shortcuts import render
+
+from apps.accounts.decorators import role_required
+from apps.accounts.models import User
+
 
 MODULES = [
     ("accounts:index", "Accounts", "Login, registration, roles and profiles"),
@@ -14,6 +19,7 @@ def home(request):
     return render(request, "core/home.html", {"modules": MODULES})
 
 
+@role_required(User.Role.ADMIN)
 def audit_log(request):
     return render(request, "core/audit_log.html")
 

@@ -4,10 +4,14 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
+from apps.accounts.decorators import role_required
+from apps.accounts.models import User
+
 from .forms import PlacementForm, DocumentForm
 from .models import Placement, Document
 
 
+@role_required(User.Role.COORDINATOR, User.Role.ADMIN)
 def index(request):
     placements = Placement.objects.select_related(
         "student",
@@ -29,13 +33,10 @@ def index(request):
         "recent_placements": placements[:5],
     }
 
-    return render(
-        request,
-        "placements/index.html",
-        context,
-    )
+    return render(request, "placements/index.html", context)
 
 
+@role_required(User.Role.COORDINATOR, User.Role.ADMIN)
 def placement_list(request):
     placements = Placement.objects.select_related(
         "student",
@@ -81,13 +82,10 @@ def placement_list(request):
         ).count(),
     }
 
-    return render(
-        request,
-        "placements/placement_list.html",
-        context,
-    )
+    return render(request, "placements/placement_list.html", context)
 
 
+@role_required(User.Role.COORDINATOR, User.Role.ADMIN)
 def placement_detail(request, pk):
     placement = get_object_or_404(
         Placement.objects.select_related(
@@ -106,13 +104,10 @@ def placement_detail(request, pk):
         "documents": documents,
     }
 
-    return render(
-        request,
-        "placements/placement_detail.html",
-        context,
-    )
+    return render(request, "placements/placement_detail.html", context)
 
 
+@role_required(User.Role.COORDINATOR, User.Role.ADMIN)
 def placement_create(request):
     if request.method == "POST":
         form = PlacementForm(request.POST)
@@ -139,6 +134,7 @@ def placement_create(request):
     )
 
 
+@role_required(User.Role.COORDINATOR, User.Role.ADMIN)
 def document_list(request):
     documents = Document.objects.select_related(
         "placement",
@@ -147,10 +143,7 @@ def document_list(request):
     )
 
     if request.method == "POST":
-        form = DocumentForm(
-            request.POST,
-            request.FILES,
-        )
+        form = DocumentForm(request.POST, request.FILES)
 
         if form.is_valid():
             placement = form.cleaned_data.get("placement")
@@ -186,24 +179,15 @@ def document_list(request):
         ).count(),
     }
 
-    return render(
-        request,
-        "placements/document_list.html",
-        context,
-    )
+    return render(request, "placements/document_list.html", context)
 
 
+@role_required(User.Role.COORDINATOR, User.Role.ADMIN)
 def add_document(request, pk):
-    placement = get_object_or_404(
-        Placement,
-        pk=pk,
-    )
+    placement = get_object_or_404(Placement, pk=pk)
 
     if request.method == "POST":
-        form = DocumentForm(
-            request.POST,
-            request.FILES,
-        )
+        form = DocumentForm(request.POST, request.FILES)
 
         if form.is_valid():
             document = form.save(commit=False)
@@ -221,9 +205,7 @@ def add_document(request, pk):
             )
 
     else:
-        form = DocumentForm(
-            initial={"placement": placement}
-        )
+        form = DocumentForm(initial={"placement": placement})
 
     today = timezone.localdate()
 
@@ -237,8 +219,4 @@ def add_document(request, pk):
         ).count(),
     }
 
-    return render(
-        request,
-        "placements/document_list.html",
-        context,
-    )
+    return render(request, "placements/document_list.html", context)
