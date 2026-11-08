@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 MODULES = [
     ("accounts:index", "Accounts", "Login, registration, roles and profiles"),
-    ("organisations:index", "Organisations", "Host organisations"),
+    ("organisations:org_dashboard", "Organisations", "Host organisations"),
     ("placements:index", "Placements", "Placement requests, approval and documents"),
     ("logbook:index", "Logbook", "Logbook entries and mentor sign-off"),
     ("assessments:index", "Assessments", "Mentor evaluations and final results"),
