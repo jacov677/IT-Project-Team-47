@@ -3,32 +3,30 @@ from django import forms
 from .models import Placement, Document
 
 
-# Form for adding and updating student placements
 class PlacementForm(forms.ModelForm):
     class Meta:
         model = Placement
-        fields = "__all__"
+        fields = [
+            "student",
+            "organisation",
+            "title",
+            "description",
+            "start_date",
+            "end_date",
+            "status",
+        ]
         widgets = {
             "start_date": forms.DateInput(attrs={"type": "date"}),
             "end_date": forms.DateInput(attrs={"type": "date"}),
+            "description": forms.Textarea(attrs={"rows": 3}),
         }
-
-
-# Form for adding placement documents
-from django import forms
-from .models import Document
 
 
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = [
-            "document_name",
+            "title",
             "document_type",
-            "file",
+            "file_path",
         ]
-
-
-
-
-

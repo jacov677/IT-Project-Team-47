@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block title %}Documents · WIL Placement System{% endblock %}
 
@@ -51,12 +52,12 @@
                         <tbody>
                             {% for document in documents %}
                             <tr>
-                                <td>{{ document.document_name }}</td>
+                                <td>{{ document.title }}</td>
                                 <td>{{ document.get_document_type_display }}</td>
                                 <td>{{ document.uploaded_at|date:"d M Y" }}</td>
                                 <td>
-                                    {% if document.file %}
-                                        <a href="{{ document.file.url }}" target="_blank">
+                                    {% if document.file_path %}
+                                        <a href="{{ document.file_path.url }}" target="_blank">
                                             View Document
                                         </a>
                                     {% else %}

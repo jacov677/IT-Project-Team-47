@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Placement Details · WIL Placement System{% endblock %}
@@ -14,12 +15,12 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-body">
-            <h2 class="h5">{{ placement.student_name }}</h2>
-            <p><strong>Company:</strong> {{ placement.company_name }}</p>
-            <p><strong>Position:</strong> {{ placement.position }}</p>
+            <h2 class="h5">{{ placement.student }}</h2>
+            <p><strong>Company:</strong> {{ placement.organisation.organisation_name }}</p>
+            <p><strong>Position:</strong> {{ placement.title }}</p>
             <p><strong>Start date:</strong> {{ placement.start_date }}</p>
             <p><strong>End date:</strong> {{ placement.end_date }}</p>
-            <p><strong>Status:</strong> {{ placement.status }}</p>
+            <p><strong>Status:</strong> {{ placement.get_status_display }}</p>
 
             <a href="{% url 'placements:add_document' placement.pk %}"
                class="btn btn-primary">
@@ -36,11 +37,11 @@
                 <ul class="list-group list-group-flush">
                     {% for document in documents %}
                         <li class="list-group-item">
-                            {{ document.document_name }}
+                            {{ document.title }}
                             ({{ document.get_document_type_display }})
 
-                            {% if document.file %}
-                                <a href="{{ document.file.url }}" target="_blank">
+                            {% if document.file_path %}
+                                <a href="{{ document.file_path.url }}" target="_blank">
                                     Open file
                                 </a>
                             {% endif %}

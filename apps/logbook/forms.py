@@ -8,14 +8,14 @@ class LogbookEntryForm(forms.ModelForm):
     class Meta:
         model = LogbookEntry
         fields = [
-            "entry_date",
-            "activities",
+            "date",
             "hours_worked",
-            "supervisor_comments",
+            "activities",
+            "skills_learned",
         ]
 
         widgets = {
-            "entry_date": forms.DateInput(attrs={"type": "date"}),
+            "date": forms.DateInput(attrs={"type": "date"}),
             "activities": forms.Textarea(attrs={"rows": 4}),
-            "supervisor_comments": forms.Textarea(attrs={"rows": 3}),
+            "skills_learned": forms.Textarea(attrs={"rows": 3}),
         }

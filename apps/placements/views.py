@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Placement, Document
 from .forms import PlacementForm, DocumentForm
@@ -5,7 +6,7 @@ from .forms import PlacementForm, DocumentForm
 
 # Main placements page
 def index(request):
-    placements = Placement.objects.all().order_by("-created_at")
+    placements = Placement.objects.all()
 
     return render(request, "placements/index.html", {
         "placements": placements
@@ -16,13 +17,9 @@ def index(request):
 def add_placement(request):
     form = PlacementForm(request.POST or None)
 
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            print("PLACEMENT SAVED SUCCESSFULLY")
-            return redirect("placements:index")
-        else:
-            print("PLACEMENT FORM ERRORS:", form.errors)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect("placements:index")
 
     return render(request, "placements/placement_form.html", {
         "form": form
@@ -32,7 +29,7 @@ def add_placement(request):
 # View placement details
 def placement_detail(request, pk):
     placement = get_object_or_404(Placement, pk=pk)
-    documents = Document.objects.filter(placement=placement)
+    documents = placement.documents.all()
 
     return render(request, "placements/placement_detail.html", {
         "placement": placement,
@@ -43,7 +40,7 @@ def placement_detail(request, pk):
 # Upload and view documents for a placement
 def add_document(request, pk):
     placement = get_object_or_404(Placement, pk=pk)
-    documents = Document.objects.filter(placement=placement).order_by("-uploaded_at")
+    documents = placement.documents.all()
 
     form = DocumentForm(
         request.POST or None,

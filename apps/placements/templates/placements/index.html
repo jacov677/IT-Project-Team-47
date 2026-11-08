@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block title %}Placements · WIL Placement System{% endblock %}
 
@@ -28,7 +29,7 @@
                         <thead>
                             <tr>
                                 <th>Student</th>
-                                <th>Company</th>
+                                <th>Organisation</th>
                                 <th>Position</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
@@ -40,12 +41,12 @@
                         <tbody>
                             {% for placement in placements %}
                             <tr>
-                                <td>{{ placement.student_name }}</td>
-                                <td>{{ placement.company_name }}</td>
-                                <td>{{ placement.position }}</td>
+                                <td>{{ placement.student }}</td>
+                                <td>{{ placement.organisation.organisation_name }}</td>
+                                <td>{{ placement.title }}</td>
                                 <td>{{ placement.start_date }}</td>
                                 <td>{{ placement.end_date }}</td>
-                                <td>{{ placement.status }}</td>
+                                <td>{{ placement.get_status_display }}</td>
                                 <td>
                                     <a href="{% url 'placements:placement_detail' placement.pk %}"
                                        class="btn btn-sm btn-outline-primary">

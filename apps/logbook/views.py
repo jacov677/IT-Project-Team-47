@@ -21,7 +21,7 @@ def placement_entries(request, placement_id):
 
     entries = LogbookEntry.objects.filter(
         placement=placement
-    ).order_by("-entry_date")
+    ).order_by("-date")
 
     return render(request, "logbook/index.html", {
         "placement": placement,
@@ -39,6 +39,7 @@ def add_entry(request, placement_id):
         if form.is_valid():
             entry = form.save(commit=False)
             entry.placement = placement
+            entry.student = request.user.student_profile
             entry.save()
 
             messages.success(request, "Logbook entry saved successfully!")
