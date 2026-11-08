@@ -3,3 +3,12 @@ migration_backup_before_cleanup/
 *.sqlite3
 *.sql
 
+
+.env
+.venv/
+.idea/
+__pycache__/
+*.pyc
+media/
+staticfiles/
+db.sqlite3
