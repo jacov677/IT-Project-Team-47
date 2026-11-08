@@ -24,5 +24,6 @@ def audit_log(request):
     return render(request, "core/audit_log.html")
 
 
+@role_required(User.Role.ADMIN)
 def settings_page(request):
     return render(request, "core/settings.html")
