@@ -13,4 +13,4 @@ Thumbs.db
 
 .venv314/
 migration_backup_before_cleanup/
-*.sql
+*.sqlite3
