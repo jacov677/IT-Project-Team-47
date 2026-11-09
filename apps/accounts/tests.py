@@ -185,10 +185,10 @@ class DashboardRedirectTests(TestCase):
         response = self.client.get(reverse("accounts:dashboard"))
         self.assertRedirects(response, "/accounts/login/?next=/accounts/dashboard/", fetch_redirect_response=False)
 
-    def test_student_goes_to_placements(self):
+    def test_student_goes_to_student_portal(self):
         self.login_as(User.Role.STUDENT)
         response = self.client.get(reverse("accounts:dashboard"))
-        self.assertRedirects(response, reverse("placements:index"), fetch_redirect_response=False)
+        self.assertRedirects(response, reverse("students:dashboard"), fetch_redirect_response=False)
 
     def test_mentor_goes_to_logbook(self):
         self.login_as(User.Role.MENTOR)
