@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.core.exceptions import PermissionDenied
@@ -220,3 +220,26 @@ class DashboardRedirectTests(TestCase):
         self.assertEqual(self.client.session.get_expiry_age(), 30 * 60)
 
 
+
+
+@override_settings(DEBUG=True)
+class CreateTeamAdminsTests(TestCase):
+    def test_creates_one_admin_per_member(self):
+        from django.core.management import call_command
+        from io import StringIO
+
+        call_command("create_team_admins", password="Team47#Testing", stdout=StringIO())
+        admins = User.objects.filter(email__endswith="@team47.test")
+        self.assertEqual(admins.count(), 6)
+        for user in admins:
+            self.assertTrue(user.is_superuser and user.is_staff and user.is_active)
+            self.assertEqual(user.role, User.Role.ADMIN)
+        self.assertTrue(self.client.login(email="jaco@team47.test", password="Team47#Testing"))
+
+    def test_running_twice_does_not_duplicate(self):
+        from django.core.management import call_command
+        from io import StringIO
+
+        call_command("create_team_admins", password="Team47#Testing", stdout=StringIO())
+        call_command("create_team_admins", password="Team47#Testing", stdout=StringIO())
+        self.assertEqual(User.objects.filter(email__endswith="@team47.test").count(), 6)
