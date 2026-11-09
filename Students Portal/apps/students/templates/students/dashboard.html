@@ -1,0 +1,52 @@
+{% extends "students/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Hello, {{ user.first_name|default:user.username }} 👋</h1>
+<p class="sub">{{ profile.programme }} · {{ profile.get_year_of_study_display }} · {{ profile.student_number }}</p>
+
+<div class="grid grid-4">
+  <div class="card stat"><div class="n">{{ total }}</div><div class="l">Total applications</div></div>
+  <div class="card stat"><div class="n">{{ pending }}</div><div class="l">In progress</div></div>
+  <div class="card stat"><div class="n">{{ approved }}</div><div class="l">Approved</div></div>
+  <div class="card stat"><div class="n">{{ rejected }}</div><div class="l">Rejected</div></div>
+</div>
+
+{% if profile.completeness < 100 %}
+<div class="card">
+  <div class="row-between"><h2>Profile {{ profile.completeness }}% complete</h2>
+  <a class="btn btn-sm" href="{% url 'students:profile_edit' %}">Complete profile</a></div>
+  <div class="progress"><span style="width:{{ profile.completeness }}%"></span></div>
+</div>
+{% endif %}
+
+<div class="grid grid-2">
+  <div class="card">
+    <div class="row-between"><h2>Recent applications</h2><a href="{% url 'students:application_list' %}">View all</a></div>
+    {% for a in recent_applications %}
+      <div class="notif"><div><strong>{{ a.opportunity.title }}</strong><br><span class="help">{{ a.opportunity.organisation.organisation_name }} · {{ a.date_applied|date:"d M Y" }}</span></div>
+      {% include "students/_status.html" with status=a.status label=a.get_status_display %}</div>
+    {% empty %}<div class="empty">No applications yet.</div>{% endfor %}
+  </div>
+
+  <div class="card">
+    <div class="row-between"><h2>Notifications</h2><a href="{% url 'students:notifications' %}">View all</a></div>
+    {% for n in recent_notifications %}
+      <div class="notif {% if not n.is_read %}unread{% endif %}"><div><strong>{{ n.title }}</strong><br><span class="help">{{ n.message }}</span></div>
+      <span class="when">{{ n.created_at|timesince }} ago</span></div>
+    {% empty %}<div class="empty">You're all caught up.</div>{% endfor %}
+  </div>
+</div>
+
+<div class="card">
+  <div class="row-between"><h2>New opportunities for you</h2><a href="{% url 'students:opportunities' %}">Browse all</a></div>
+  <div class="grid grid-3">
+    {% for o in latest_opportunities %}
+      <div class="card" style="margin:0">
+        <strong>{{ o.title }}</strong><br><span class="help">{{ o.organisation.organisation_name }} · {{ o.organisation.industry }}</span>
+        <p class="help">Closes {{ o.closing_date|date:"d M Y"|default:"when filled" }}</p>
+        <a class="btn btn-sm" href="{% url 'students:opportunity_detail' o.pk %}">View &amp; apply</a>
+      </div>
+    {% empty %}<div class="empty">No new opportunities right now.</div>{% endfor %}
+  </div>
+</div>
+{% endblock %}
