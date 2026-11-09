@@ -1,0 +1,19 @@
+{% extends "students/base.html" %}
+{% block title %}Notifications{% endblock %}
+{% block content %}
+<div class="row-between"><div><h1>Notifications</h1><p class="sub">Updates about your applications.</p></div>
+{% if unread_count %}<form method="post" action="{% url 'students:notifications_read_all' %}">{% csrf_token %}<button class="btn btn-outline" type="submit">Mark all as read</button></form>{% endif %}</div>
+<div class="card">
+  {% for n in page %}
+  <div class="notif {% if not n.is_read %}unread{% endif %}">
+    <div><strong>{{ n.title }}</strong><br>{{ n.message }}<br><span class="when">{{ n.created_at|date:"d M Y, H:i" }}</span></div>
+    {% if not n.is_read %}<form method="post" action="{% url 'students:notification_read' n.pk %}">{% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}"><button class="btn btn-outline btn-sm" type="submit">Mark read</button></form>{% endif %}
+  </div>
+  {% empty %}<div class="empty">No notifications yet.</div>{% endfor %}
+  {% if page.has_other_pages %}<div class="pager">
+    {% if page.has_previous %}<a href="?page={{ page.previous_page_number }}">← Newer</a>{% endif %}
+    <span>Page {{ page.number }} / {{ page.paginator.num_pages }}</span>
+    {% if page.has_next %}<a href="?page={{ page.next_page_number }}">Older →</a>{% endif %}</div>{% endif %}
+</div>
+{% endblock %}

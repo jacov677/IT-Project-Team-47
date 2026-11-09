@@ -41,7 +41,7 @@ class RegisterView(FormView):
 
 # Where each role lands after logging in.
 ROLE_HOME = {
-    User.Role.STUDENT: "placements:index",
+    User.Role.STUDENT: "students:dashboard",
     User.Role.COORDINATOR: "placements:index",
     User.Role.MENTOR: "logbook:index",
     User.Role.EMPLOYER: "organisations:index",
